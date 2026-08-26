@@ -1,0 +1,1566 @@
+/* 8funder — feuille de style de l'extension.
+   Tout est porté par .f8 : le thème Arolax garde son en-tête, son pied de page
+   et sa typographie, et rien d'ici ne fuit sur les 34 pages Elementor. */
+
+.f8{
+  /* THEME VERT. --f8-blue et --f8-red gardent leur NOM pour ne pas reecrire
+     150 declarations, mais portent desormais des verts : le bandeau est un
+     vert foret, les boutons un vert vif. Le montant passe en bronze — laisser
+     le montant en vert au milieu d'un site vert lui ferait perdre son role de
+     signal. */
+  --f8-ink:#0d1f16;
+  --f8-ink-2:#2c4438;
+  --f8-mut:#5c7166;
+  --f8-line:#dbeae1;
+  --f8-bg:#f4faf6;
+  --f8-card:#ffffff;
+  --f8-red:#14804f;      /* bouton principal */
+  --f8-red-d:#106a41;
+  --f8-blue:#12794b;     /* bandeau, boutons secondaires */
+  --f8-ok:#8a5f13;       /* montant : bronze, pour rester lisible comme signal */
+  --f8-r:12px;
+  color:var(--f8-ink);
+  font-size:16px;
+  line-height:1.6;
+  background:var(--f8-bg);
+}
+.f8 *,.f8 *::before,.f8 *::after{box-sizing:border-box}
+.f8 a{color:var(--f8-blue);text-decoration:none}
+.f8 a:hover{text-decoration:underline}
+.f8 h1,.f8 h2,.f8 h3{color:var(--f8-ink);line-height:1.22;margin:0 0 10px;font-weight:700}
+.f8 p{margin:0 0 12px}
+.f8-wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.f8-muted{color:var(--f8-mut)}
+.f8-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+/* Une SVG sans width/height retombe sur 300x150 dans un conteneur flex.
+   Chaque icône est dimensionnée, et le flex ne la laisse pas s'écraser. */
+.f8 .f8-i{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;vertical-align:-3px}
+
+/* ---------- bandeau ---------- */
+.f8-mast{
+  background:var(--f8-blue);
+  background-image:linear-gradient(135deg,#12794b 0%,#0e6440 58%,#157f52 100%);
+  color:#fff;padding:44px 0 0;margin-bottom:26px;
+}
+.f8-mast h1{color:#fff;font-size:clamp(26px,3.4vw,40px);max-width:22ch;margin-bottom:12px}
+.f8-mast .f8-lede{color:#eaf7ef;max-width:62ch;font-size:17px;margin-bottom:18px}
+.f8-crumb{font-size:13px;color:#eaf7ef;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap}
+.f8-crumb a{color:#ffffff}
+.f8-crumb span{color:#eaf7ef}
+
+.f8-nav{display:flex;gap:4px;flex-wrap:wrap;margin-top:22px}
+/* .f8-nav a est plus spécifique que .f8-lang : on cible les deux ensemble,
+   sinon le sélecteur de langue perd sa couleur et son fond. */
+.f8-nav a{
+  color:#eaf7ef;padding:11px 17px;border-radius:10px 10px 0 0;font-weight:600;font-size:15px;
+}
+.f8-nav a:hover{background:rgba(255,255,255,.10);color:#fff;text-decoration:none}
+/* Le selecteur de langue etait en blanc sur rgba(255,255,255,.12) : ce voile
+   ECLAIRCIT le bandeau, donc il rapproche le fond du texte. Une fois la couche
+   composee avec le vert du bandeau, le rapport tombait a 4,31 — sous les 4,5
+   exiges pour du texte de 14 px. On assombrit au lieu d'eclaircir : meme effet
+   de relief, contraste a 9,8. */
+.f8-nav a.f8-lang{margin-inline-start:auto;background:rgba(0,0,0,.22);border-radius:10px;
+  margin-bottom:8px;color:#fff;font-size:14px;padding:8px 14px}
+.f8-nav a.f8-lang:hover{background:rgba(0,0,0,.38)}
+
+/* ---------- recherche et filtres ---------- */
+.f8-filters{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:16px;margin:0 0 20px;box-shadow:0 1px 2px rgba(13,31,22,.05)}
+.f8-search{display:flex;align-items:center;gap:10px;border:1.5px solid var(--f8-line);
+  border-radius:10px;padding:0 12px;background:#fff}
+.f8-search:focus-within{border-color:var(--f8-blue);box-shadow:0 0 0 3px rgba(11,81,50,.14)}
+.f8-search .f8-i{color:var(--f8-mut)}
+.f8-search input{flex:1;border:0;outline:0;padding:13px 0;font-size:16px;background:transparent;color:var(--f8-ink);min-width:0}
+.f8-selects{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;margin-top:14px;align-items:end}
+.f8-selects label{display:block;font-size:12.5px;font-weight:700;color:var(--f8-ink-2);
+  text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.f8-selects select{width:100%;padding:10px 11px;border:1.5px solid var(--f8-line);border-radius:9px;
+  background:#fff;font-size:14.5px;color:var(--f8-ink)}
+.f8-actions{display:flex;gap:10px;align-items:center}
+.f8 a.f8-reset{font-size:14px;color:#4f6459;white-space:nowrap}
+
+.f8 .f8-btn{
+  display:inline-flex;align-items:center;gap:8px;background:var(--f8-red);color:#fff;
+  border:0;border-radius:9px;padding:12px 20px;font-size:15px;font-weight:650;cursor:pointer;
+  line-height:1.2;text-decoration:none;
+}
+.f8 .f8-btn:hover{background:var(--f8-red-d);color:#fff;text-decoration:none}
+.f8 .f8-btn-lg{padding:15px 28px;font-size:16.5px}
+.f8 .f8-btn-ghost{background:var(--f8-blue)}
+.f8 .f8-btn-ghost:hover{background:#0d5f3a}
+
+.f8-count{font-size:15px;color:var(--f8-ink-2);margin:0 0 14px;font-weight:600}
+
+/* ---------- cartes ---------- */
+.f8-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.f8-grid-3{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.f8-card{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:18px;display:flex;flex-direction:column;gap:8px}
+.f8-card:hover{border-color:#b9d3c4;box-shadow:0 6px 18px rgba(13,31,22,.08)}
+.f8-card-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:2px}
+.f8-card h3{font-size:17px;margin:0;line-height:1.3}
+.f8-card h3 a{color:var(--f8-ink)}
+.f8-card h3 a:hover{color:var(--f8-blue)}
+.f8-short{font-size:14.5px;color:var(--f8-ink-2);margin:0}
+.f8-org{font-size:13px;color:var(--f8-mut);margin:0}
+.f8-amount{font-size:15px;font-weight:700;color:var(--f8-ok);margin:0}
+/* .f8 a vaut (0,1,1) et bat une simple classe (0,1,0) : toute ancre a qui on
+   donne une couleur doit etre ciblee avec l'element, sinon elle recupere le
+   bleu des liens. C'est ce qui a rendu le bouton lateral invisible. */
+.f8 a.f8-more{margin-top:auto;padding-top:8px;font-size:14.5px;font-weight:650;display:inline-flex;
+  align-items:center;gap:7px;color:var(--f8-blue)}
+
+.f8-pill{font-size:11.5px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;
+  padding:4px 9px;border-radius:100px;background:#e9f1ec;color:var(--f8-ink-2);white-space:nowrap}
+.f8-pill-federal{background:#dcf2e4;color:#0e6b3f}
+.f8-pill-provincial{background:#e2eef4;color:#12556b}
+.f8-pill-organisme{background:#f4ecdb;color:#6b4c0f}
+.f8-scope{font-size:13px;color:var(--f8-mut);display:inline-flex;align-items:center;gap:5px}
+.f8-score{margin-inline-start:auto;font-size:13px;font-weight:800;color:#fff;background:var(--f8-blue);
+  border-radius:100px;padding:3px 10px}
+
+.f8-tags{display:flex;flex-wrap:wrap;gap:6px}
+.f8 .f8-tag{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:4px 10px;
+  border-radius:100px;background:#eef4f0;color:var(--f8-ink-2);border:1px solid var(--f8-line)}
+.f8 .f8-tag:hover{background:#e3f0e8;text-decoration:none;border-color:#b9d3c4}
+.f8 .f8-tag-s{background:#fff;color:var(--f8-mut)}
+.f8-tags-lg .f8-tag{font-size:13.5px;padding:7px 14px}
+
+/* ---------- fiche ---------- */
+.f8-cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+.f8-body{min-width:0}
+.f8-prose{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:22px;font-size:16px;color:var(--f8-ink-2);margin-bottom:18px}
+.f8-official{margin:18px 0 24px}
+.f8-facts{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:20px;position:sticky;top:20px}
+.f8-facts dl{margin:0}
+.f8-facts dt{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--f8-mut);margin-top:14px}
+.f8-facts dt:first-child{margin-top:0}
+.f8-facts dd{margin:4px 0 0;font-size:15px;color:var(--f8-ink)}
+.f8-hint{display:block;font-size:12.5px;color:var(--f8-mut);margin-top:3px;line-height:1.45}
+.f8 a.f8-side-cta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:20px;
+  background:var(--f8-blue);color:#fff;border-radius:9px;padding:13px 16px;font-weight:650;font-size:15px}
+.f8 a.f8-side-cta:hover{background:#0d5f3a;color:#fff;text-decoration:none}
+.f8-related{margin-top:34px}
+
+/* ---------- diagnostic ---------- */
+.f8-form{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:24px}
+.f8-form fieldset{border:0;padding:0;margin:0 0 26px}
+.f8-form legend{font-size:18px;font-weight:700;color:var(--f8-ink);padding:0;margin-bottom:12px}
+.f8-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:9px}
+.f8-opts-wide{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.f8-opts label{display:flex;align-items:center;gap:9px;border:1.5px solid var(--f8-line);
+  border-radius:10px;padding:11px 13px;cursor:pointer;background:#fff;font-size:14.5px}
+.f8-opts label:hover{border-color:#a9c9b7;background:#f6fbf8}
+.f8-opts input{accent-color:var(--f8-red);flex:0 0 auto;margin:0}
+.f8-opts input:checked+span{font-weight:650;color:var(--f8-blue)}
+.f8-res-head{margin-bottom:18px}
+.f8-recap{font-size:14px;color:var(--f8-ink-2);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+
+/* ---------- formulaire de demande ---------- */
+.f8-lead{margin:34px 0 10px}
+.f8-lead-in{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:24px}
+.f8-lead h2{font-size:21px}
+.f8-lead .f8-lede{color:var(--f8-ink-2);font-size:15px}
+.f8-grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.f8-lead label{display:block;font-size:13px;font-weight:650;color:var(--f8-ink-2);margin-bottom:5px}
+.f8-lead input,.f8-lead select,.f8-lead textarea{width:100%;padding:11px 12px;border:1.5px solid var(--f8-line);
+  border-radius:9px;font-size:15px;font-family:inherit;color:var(--f8-ink);background:#fff}
+.f8-lead input:focus,.f8-lead select:focus,.f8-lead textarea:focus{outline:0;border-color:var(--f8-blue);
+  box-shadow:0 0 0 3px rgba(11,81,50,.14)}
+.f8-lead p{margin:0 0 14px}
+/* pot de miel : caché par clip, jamais par un décalage négatif — un left:-9999px
+   ajoute 9 999 px de défilement horizontal dès qu'un document passe en RTL */
+.f8-hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%)}
+.f8-ok{display:flex;align-items:center;gap:9px;background:#e4f4ea;color:#0b5132;border:1px solid #b7ddc5;
+  border-radius:9px;padding:12px 14px;font-weight:600}
+.f8-ko{background:#fbeae6;color:#8a2b12;border:1px solid #f0cabd;border-radius:9px;padding:12px 14px;font-weight:600}
+
+/* ---------- listes de liens ---------- */
+.f8-browse{margin-top:38px}
+.f8-browse h2{font-size:19px;margin-bottom:12px}
+.f8-chips{display:flex;flex-wrap:wrap;gap:8px}
+.f8 .f8-chip{display:inline-flex;align-items:center;gap:9px;background:var(--f8-card);
+  border:1px solid var(--f8-line);border-radius:100px;padding:9px 8px 9px 15px;font-size:14px;color:var(--f8-ink-2)}
+.f8 .f8-chip:hover{border-color:var(--f8-blue);color:var(--f8-blue);text-decoration:none}
+.f8 .f8-chip b{background:#e9f1ec;border-radius:100px;padding:2px 9px;font-size:12.5px;color:var(--f8-ink-2)}
+
+.f8-pager{display:flex;justify-content:center;gap:6px;margin:30px 0 6px;flex-wrap:wrap}
+.f8-pager .page-numbers{display:inline-flex;min-width:40px;height:40px;align-items:center;justify-content:center;
+  padding:0 12px;border:1px solid var(--f8-line);border-radius:9px;background:#fff;color:var(--f8-ink-2);font-size:14.5px}
+.f8-pager .page-numbers:hover{border-color:var(--f8-blue);text-decoration:none}
+.f8-pager .page-numbers.current{background:var(--f8-blue);border-color:var(--f8-blue);color:#fff;font-weight:700}
+
+.f8-empty{background:var(--f8-card);border:1px dashed #c2d6c9;border-radius:var(--f8-r);
+  padding:46px 24px;text-align:center;color:var(--f8-ink-2)}
+.f8-empty .f8-i{width:34px;height:34px;flex:0 0 34px;color:var(--f8-mut);margin-bottom:8px}
+.f8-empty h2{font-size:20px}
+.f8-empty p{max-width:52ch;margin:0 auto 14px}
+
+/* ---------- mention de source ---------- */
+.f8-source{margin-top:44px;padding:26px 0 34px;background:#e9f1ec;border-top:1px solid var(--f8-line)}
+.f8-source strong{display:block;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--f8-ink-2);margin-bottom:6px}
+.f8-source p{font-size:13.5px;color:#4b5d53;max-width:80ch;margin:0 0 5px}
+.f8-derived{font-style:italic}
+
+/* ---------- écrans étroits ---------- */
+@media (max-width:1020px){
+  .f8-cols{grid-template-columns:1fr}
+  .f8-facts{position:static}
+  .f8-selects{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .f8-wrap{padding:0 15px}
+  .f8-mast{padding-top:30px}
+  .f8-selects{grid-template-columns:1fr}
+  .f8-grid2{grid-template-columns:1fr}
+  .f8-search{flex-wrap:wrap;padding:10px 12px}
+  .f8-search input{width:100%;padding:4px 0 8px}
+  .f8 .f8-search .f8-btn{width:100%;justify-content:center}
+  .f8-nav{gap:2px}
+  .f8-nav a{padding:9px 12px;font-size:14px}
+  .f8-nav a.f8-lang{margin-inline-start:0}
+}
+
+/* ---------- index des organismes ---------- */
+.f8-orgs{display:flex;flex-direction:column;gap:6px}
+.f8 a.f8-org-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;align-items:center;
+  background:var(--f8-card);border:1px solid var(--f8-line);border-radius:10px;padding:13px 16px;
+  color:var(--f8-ink);font-size:15px}
+.f8 a.f8-org-row:hover{border-color:var(--f8-blue);text-decoration:none;box-shadow:0 3px 12px rgba(13,31,22,.07)}
+.f8-org-n{min-width:0;overflow-wrap:anywhere;font-weight:600}
+.f8 a.f8-org-row b{background:var(--f8-blue);color:#fff;border-radius:100px;padding:3px 11px;
+  font-size:13px;font-weight:800;min-width:34px;text-align:center}
+.f8-facts .f8-tag{margin:0 5px 5px 0}
+.f8-facts .f8-tag b{font-weight:800}
+@media (max-width:640px){
+  .f8 a.f8-org-row{grid-template-columns:minmax(0,1fr) auto;row-gap:8px}
+  .f8 a.f8-org-row .f8-pill{grid-column:1}
+}
+
+/* ---------- annuaire de prestataires ---------- */
+.f8-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 22px}
+.f8 a.f8-duo-c{display:flex;flex-direction:column;gap:5px;background:var(--f8-card);
+  border:1.5px solid var(--f8-line);border-radius:var(--f8-r);padding:20px 22px;color:var(--f8-ink)}
+.f8 a.f8-duo-c:hover{border-color:var(--f8-blue);text-decoration:none;box-shadow:0 5px 18px rgba(13,31,22,.08)}
+.f8 a.f8-duo-c b{font-size:18px;font-weight:700}
+.f8 a.f8-duo-c span{font-size:14.5px;color:var(--f8-ink-2)}
+@media (max-width:700px){.f8-duo{grid-template-columns:1fr}}
+
+/* ---------- accueil ---------- */
+.f8-hero{background:var(--f8-blue);
+  background-image:linear-gradient(135deg,#12794b 0%,#0e6440 58%,#157f52 100%);
+  color:#fff;padding:64px 0 58px;margin-bottom:30px}
+.f8-hero h1{color:#fff;font-size:clamp(28px,4vw,46px);max-width:19ch;margin:0 0 16px}
+.f8-hero-l{color:#eaf7ef;font-size:18px;max-width:60ch;margin:0 0 26px}
+.f8-hero-s{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;
+  padding:0 14px;max-width:720px;box-shadow:0 8px 26px rgba(6,40,24,.22)}
+.f8-hero-s .f8-i{color:var(--f8-mut)}
+.f8-hero-s input{flex:1;min-width:0;border:0;outline:0;padding:18px 0;font-size:17px;
+  background:transparent;color:var(--f8-ink);font-family:inherit}
+.f8-hero-n{color:#eaf7ef;font-size:13.5px;margin:16px 0 0;letter-spacing:.02em}
+
+.f8-portes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 30px}
+.f8 a.f8-porte{display:flex;flex-direction:column;gap:6px;background:var(--f8-card);
+  border:1.5px solid var(--f8-line);border-radius:var(--f8-r);padding:20px;color:var(--f8-ink)}
+.f8 a.f8-porte:hover{border-color:var(--f8-blue);text-decoration:none;
+  box-shadow:0 6px 20px rgba(13,31,22,.09);transform:translateY(-1px)}
+.f8 a.f8-porte b{font-size:17px;font-weight:700;line-height:1.25}
+.f8 a.f8-porte span{font-size:14px;color:var(--f8-ink-2)}
+
+/* auto-fit et pas repeat(4,…) : la quatrieme case disparait tant qu'aucun
+   prestataire n'est inscrit, et une grille figee a quatre colonnes laisserait
+   alors un blanc a droite. */
+.f8-chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:0 0 34px;
+  background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:22px}
+.f8-chiffres div{text-align:center}
+.f8-chiffres b{display:block;font-size:30px;font-weight:800;color:var(--f8-blue);line-height:1.1}
+.f8-chiffres span{font-size:13px;color:var(--f8-ink-2)}
+
+/* ---------- etapes numerotees ---------- */
+.f8-h2{font-size:22px;margin:34px 0 6px}
+.f8-sub{color:var(--f8-ink-2);font-size:15px;margin:0 0 16px;max-width:70ch}
+.f8-etapes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.f8-etapes li{display:flex;gap:16px;background:var(--f8-card);border:1px solid var(--f8-line);
+  border-radius:var(--f8-r);padding:18px 20px}
+/* .f8-etnum et pas .f8-num : ce nom-la servait DEJA aux cellules chiffrees des
+   tableaux (.f8 .f8-num, plus bas, text-align:end). Les deux regles se
+   cumulaient, donc chaque valeur de taux etait rendue en pastille verte de
+   34 px avec display:flex — la colonne « Taux % » de /taux/ etait une rangee de
+   gelules. Rien ne pouvait le signaler : les deux regles sont valides, le HTML
+   est valide, et la page repond 200. Deux choses differentes, deux noms. */
+.f8-etnum{flex:0 0 34px;height:34px;border-radius:100px;background:var(--f8-blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.f8-etapes b{display:block;font-size:16.5px;margin-bottom:3px}
+.f8-etapes p{margin:0;color:var(--f8-ink-2);font-size:14.5px;max-width:74ch}
+
+.f8-avert{background:#fdf6e7;border-inline-start:3px solid #b8862b;border-radius:0 8px 8px 0;
+  padding:13px 16px;font-size:14px;color:#6b4c0f;margin:0 0 24px;max-width:82ch}
+
+/* ---------- devis ---------- */
+.f8-devis{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.f8-devis-c{background:var(--f8-card);border:1.5px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:20px;display:flex;flex-direction:column;gap:9px}
+.f8-devis-ok{border-color:var(--f8-blue);box-shadow:0 0 0 3px rgba(18,121,75,.12)}
+.f8-devis-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.f8-devis-h h3{font-size:17px;margin:0}
+.f8-devis-m{font-size:24px;font-weight:800;color:var(--f8-ink);margin:0}
+.f8-devis-m em{font-size:14.5px;font-weight:500;color:var(--f8-mut);font-style:italic}
+.f8-devis-d{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--f8-ink-2);margin:0}
+.f8-devis-t{font-size:14.5px;color:var(--f8-ink-2)}
+.f8-devis-t p{margin:0 0 8px}
+
+@media (max-width:900px){
+  .f8-portes{grid-template-columns:1fr 1fr}
+  .f8-chiffres{grid-template-columns:1fr 1fr;gap:20px 14px}
+}
+@media (max-width:600px){
+  .f8-portes{grid-template-columns:1fr}
+  .f8-hero{padding:44px 0 40px}
+  .f8-hero-s{flex-wrap:wrap;padding:12px 14px}
+  .f8-hero-s input{width:100%;padding:6px 0 10px}
+  .f8 .f8-hero-s .f8-btn{width:100%;justify-content:center}
+  .f8-etapes li{flex-direction:column;gap:10px}
+}
+
+/* ================================================================
+   PAGES DE PILIER — « à la manière de 8secur »
+   ----------------------------------------------------------------
+   Ossature identique sur les trois pages : en-tête sombre, surtitre
+   en capitales espacées, titre très gras, rangées à filets fins,
+   panneau numéroté, bandeau final. Le bleu de 8secur devient ici le
+   vert de 8funder ; le reste du rythme est repris tel quel.
+
+   Tout est sous .f8-pilier : le reste du répertoire garde son fond
+   clair, et rien de sombre ne fuit sur les pages existantes.
+   ================================================================ */
+/* VERT CLAIR, demande du client : « met un vert claire », « le vert du FUNDER ».
+   Les pages de pilier reprennent donc la palette du reste du repertoire au lieu
+   d'un fond nuit. Renverser un fond ne se fait pas en echangeant deux
+   variables : tout ce qui etait ecrit en #fff sur du noir devient illisible sur
+   du clair, et il y a huit declarations comme ca plus bas. Elles passent
+   toutes par --ptit. */
+.f8-pilier{
+  --pn:#f4faf6;        /* fond principal — le --f8-bg du reste du site */
+  --pn2:#ffffff;       /* panneaux : blanc, pour qu'ils se detachent du fond */
+  --pl:#cfe6d9;        /* filets */
+  --ptit:#0b1a12;      /* titres */
+  --ptx:#22392e;       /* texte courant */
+  --pmu:#4c6357;       /* texte secondaire */
+  --pac:#0e6b3f;       /* accent : surtitres, numeros. Le #6fe3ad d'origine
+                          etait fait pour du noir, il tombe a 1,7 sur clair */
+  background:var(--pn);
+  color:var(--ptx);
+}
+/* La typographie des titres est celle de 8secur : une grotesque tres grasse et
+   serree. Sans cette pile, les titres heritent du serif d'Arolax et la page
+   ressemble a un article de blog, pas a une page de service. */
+.f8-pilier h1,.f8-pilier h2,.f8-pilier h3,
+.f8-pilier .f8-prow-t,.f8-pilier .f8-psteps b,.f8-pilier .f8-pcap b,
+.f8-pilier .f8-pmes-c b,.f8-pilier .f8-pbtn{
+  font-family:"Inter","Helvetica Neue",Helvetica,Arial,"Liberation Sans",system-ui,sans-serif;
+  font-feature-settings:"kern" 1}
+.f8-pilier h1,.f8-pilier h2,.f8-pilier h3{color:var(--ptit)}
+.f8-pilier p{color:var(--ptx)}
+.f8-pilier a{color:var(--pac)}
+
+/* ---------- 1. en-tête ---------- */
+.f8-ph{padding:52px 0 64px;position:relative;overflow:hidden;
+  border-bottom:1px solid var(--pl);
+  background:
+    radial-gradient(760px 420px at 88% 18%,rgba(20,128,79,.10),transparent 62%),
+    linear-gradient(180deg,#eef8f2 0%,#e4f2e9 100%)}
+/* Le logo remplace le motif retire. Hauteur fixe : une SVG posee sans
+   dimension se replie sur 300x150 et pousse le surtitre hors de l'ecran. */
+.f8-ph-logo{display:inline-block;margin:0 0 26px;line-height:0}
+.f8-ph-logo img{height:52px;width:auto;display:block}
+.f8 .f8-ph-logo:hover{text-decoration:none}
+/* .f8-pilier p vaut (0,1,1) et bat .f8-ph-kick (0,1,0) : le surtitre n'a jamais
+   pris l'accent, il heritait du texte courant. Invisible tant que les deux
+   couleurs etaient lisibles — c'est le meme piege que .f8-nav a contre .btn.
+   On cible donc avec le parent. Idem pour le lede juste dessous. */
+.f8-pilier .f8-ph-kick{color:var(--pac);font-size:12.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;margin:0 0 20px;line-height:1.9}
+.f8-ph h1{font-size:clamp(34px,5.1vw,62px);line-height:1.05;letter-spacing:-.028em;
+  font-weight:800;margin:0 0 22px;max-width:20ch}
+.f8-ph .f8-wrap{position:relative}
+.f8-pilier .f8-ph-lede{font-size:17.5px;line-height:1.62;color:var(--pmu);max-width:62ch;margin:0 0 30px}
+.f8-ph-act{display:flex;flex-wrap:wrap;gap:12px}
+
+.f8 .f8-pbtn{display:inline-flex;align-items:center;justify-content:center;
+  padding:15px 24px;font-size:15px;font-weight:700;line-height:1.2;
+  border:1.5px solid #a9cdb9;border-radius:2px;background:#fff;
+  color:var(--ptit);text-decoration:none}
+.f8 .f8-pbtn:hover{border-color:var(--pac);color:var(--pac);text-decoration:none}
+.f8 .f8-pbtn-1{background:var(--f8-red);border-color:var(--f8-red);color:#fff}
+.f8 .f8-pbtn-1:hover{background:var(--f8-red-d);border-color:var(--f8-red-d)}
+
+/* ---------- barre des services ---------- */
+.f8-psub{border-block:1px solid var(--pl);background:var(--pn2)}
+.f8-psub .f8-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;padding-block:13px}
+.f8-psub-t{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pmu)}
+.f8 .f8-psub-l{font-size:14.5px;font-weight:600;color:var(--ptx);text-decoration:none;
+  padding:4px 0;border-bottom:2px solid transparent}
+.f8 .f8-psub-l:hover{color:var(--pac);text-decoration:none}
+.f8 .f8-psub-on{color:var(--pac);border-bottom-color:var(--pac)}
+.f8 .f8-psub-lang{margin-inline-start:auto;color:var(--pmu)}
+
+/* ---------- 2. chiffres mesurés ---------- */
+.f8-pmes{border-bottom:1px solid var(--pl)}
+.f8-pmes .f8-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--pl);border-inline:1px solid var(--pl);padding:0;max-width:1180px}
+.f8-pmes-c{background:var(--pn);padding:26px 22px;display:flex;flex-direction:column;gap:5px}
+.f8-pmes-c b{font-size:32px;font-weight:800;color:var(--ptit);line-height:1;letter-spacing:-.02em}
+.f8-pmes-c span{font-size:13px;color:var(--pmu);line-height:1.4}
+
+/* ---------- 3. rangées ---------- */
+.f8-psec{padding:70px 0}
+.f8-psec-alt{background:var(--pn2);border-top:1px solid var(--pl)}
+.f8-psec h2,.f8-ppan h2{font-size:clamp(24px,3vw,34px);line-height:1.16;letter-spacing:-.018em;
+  font-weight:800;margin:0 0 30px;max-width:26ch}
+.f8-prows{border-top:1px solid var(--pl)}
+.f8-prow{display:grid;grid-template-columns:minmax(180px,30%) 1fr;gap:24px 40px;
+  padding:26px 0;border-bottom:1px solid var(--pl)}
+.f8-prow-t{font-size:17px;font-weight:700;color:var(--ptit);line-height:1.3}
+.f8-prow-d{font-size:15.5px;line-height:1.65;color:var(--pmu)}
+
+/* ---------- 4. panneau numéroté ---------- */
+.f8-ppan{padding:70px 0;background:var(--pn2);border-top:1px solid var(--pl)}
+.f8-pilier .f8-ppan-s{font-size:16.5px;color:var(--pmu);max-width:64ch;margin:-18px 0 34px}
+.f8-psteps{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--pl);
+  border:1px solid var(--pl)}
+.f8-psteps li{background:var(--pn2);padding:26px 22px;display:flex;flex-direction:column;gap:9px}
+.f8-pn{font-size:12.5px;font-weight:800;letter-spacing:.12em;color:var(--pac)}
+.f8-psteps b{font-size:16.5px;color:var(--ptit);line-height:1.3}
+.f8-pd{font-size:14.5px;line-height:1.62;color:var(--pmu)}
+
+/* ---------- 5. capacités ---------- */
+.f8-pcaps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px 34px}
+.f8-pcaps-3{grid-template-columns:repeat(3,1fr)}
+.f8-pcaps-4{grid-template-columns:repeat(4,1fr)}
+.f8-pcap b{display:block;font-size:16px;color:var(--ptit);margin-bottom:7px;
+  padding-top:14px;border-top:2px solid var(--pac)}
+.f8-pcap p{font-size:14.5px;line-height:1.62;color:var(--pmu);margin:0}
+
+/* la note d'avertissement, version claire */
+.f8-pilier .f8-avert{background:rgba(20,128,79,.06);border-inline-start:3px solid var(--pac);
+  border-radius:0;color:var(--ptx);margin:44px 0 0;font-size:14.5px;max-width:88ch;padding:16px 20px}
+
+/* ---------- 6. bandeau ---------- */
+/* Couleur pleine SOUS le degrade, comme .f8-mast plus haut. Un degrade est un
+   background-IMAGE : le background-color reste transparent, donc le bandeau
+   heritait de la couleur du parent. Tant que .f8-pilier etait nuit, du blanc
+   sur nuit passait la mesure par accident ; en clair, le meme blanc tombe a
+   1,05 alors que le rendu, lui, n'a jamais change. La couleur pleine remet la
+   mesure d'accord avec ce que l'oeil voit, et sert de repli si le degrade ne
+   se charge pas. */
+.f8-pband{background-color:#0e6440;
+  background-image:linear-gradient(135deg,#12794b 0%,#0e6440 58%,#157f52 100%)}
+.f8-pband .f8-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:24px;padding-block:46px}
+.f8-pband h2{font-size:clamp(21px,2.6vw,29px);margin:0 0 8px;max-width:22ch;color:#fff}
+.f8-pband .f8-pbtn{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.f8-pband .f8-pbtn:hover{border-color:#fff;color:#fff}
+.f8-pband p{margin:0;color:#e9f6ef;font-size:15.5px;max-width:56ch;line-height:1.6}
+.f8-pband .f8-pbtn-1{background:#fff;border-color:#fff;color:#0d4a2e}
+.f8-pband .f8-pbtn-1:hover{background:#eafaf1;border-color:#eafaf1;color:#0b3d26}
+
+/* la mention de source */
+.f8-pilier .f8-source{background:var(--pn);border-top:1px solid var(--pl);color:var(--pmu)}
+.f8-pilier .f8-source strong{color:var(--ptit)}
+.f8-pilier .f8-source p{color:var(--pmu)}
+
+@media (max-width:1080px){
+  .f8-pcaps-3,.f8-pcaps-4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .f8-pmes .f8-wrap{grid-template-columns:1fr 1fr}
+  .f8-prow{grid-template-columns:1fr;gap:8px}
+  .f8-ph{padding:56px 0 48px}
+  .f8-psec,.f8-ppan{padding:52px 0}
+}
+@media (max-width:600px){
+  .f8-ph-act{flex-direction:column;align-items:stretch}
+  .f8 .f8-pbtn{width:100%}
+  .f8-psub .f8-wrap{gap:6px 14px}
+  .f8-pcaps-3,.f8-pcaps-4{grid-template-columns:1fr}
+  .f8 .f8-psub-lang{margin-inline-start:0}
+}
+
+/* ================================================================== */
+/* Comparateur et taux                                                 */
+/* ================================================================== */
+
+/* ---------- barre de filtres ---------- */
+.f8-cfiltres{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+  background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:18px;margin-bottom:18px;
+}
+.f8-cf{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f8-cf label{font-size:13px;font-weight:600;color:var(--f8-ink-2)}
+.f8 .f8-cf select,.f8 .f8-cf input{
+  width:100%;min-width:0;font:inherit;font-size:15px;color:var(--f8-ink);
+  background:#fff;border:1px solid var(--f8-line);border-radius:8px;padding:9px 11px;
+}
+.f8 .f8-cf select:focus,.f8 .f8-cf input:focus{outline:2px solid var(--f8-blue);outline-offset:1px}
+
+.f8-ccount{font-size:17px;font-weight:700;color:var(--f8-ink);margin:0 0 4px}
+.f8-calerte{min-height:22px;margin:0 0 10px;font-size:14px;color:#8a3d13;font-weight:600}
+.f8-cnote{font-size:13.5px;margin:22px 0 34px}
+.f8-ctronq{
+  grid-column:1/-1;margin:6px 0 0;font-size:14px;color:var(--f8-mut);
+  background:#fff;border:1px dashed var(--f8-line);border-radius:10px;padding:14px 16px;
+}
+.f8-cvide{grid-column:1/-1;background:#fff;border:1px solid var(--f8-line);
+  border-radius:var(--f8-r);padding:26px;color:var(--f8-ink-2);margin:0}
+
+/* ---------- la liste ---------- */
+.f8-cliste{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
+.f8-cart{
+  background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:16px 16px 14px;display:flex;flex-direction:column;gap:7px;min-width:0;
+}
+.f8-cart h3{font-size:16px;margin:0;line-height:1.3}
+.f8-cart h3 a{color:var(--f8-ink)}
+.f8-cart h3 a:hover{color:var(--f8-blue)}
+.f8-corg{font-size:13px;color:var(--f8-mut);margin:0;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.f8-cmeta{display:flex;flex-wrap:wrap;gap:5px;margin:0}
+.f8-cmeta span{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:99px;
+  background:#eaf5ef;color:#14603f;border:1px solid #cfe6d9;white-space:nowrap}
+.f8-cmeta .f8-cniv{background:#e7eef9;color:#204070;border-color:#cddcf1}
+.f8-cmeta .f8-cprov{background:#f6efe2;color:#6b4c10;border-color:#e6d7b8}
+.f8-cres{font-size:13.5px;color:var(--f8-ink-2);margin:0;flex:1 1 auto}
+.f8 .f8-cbtn{
+  align-self:flex-start;margin-top:2px;font:inherit;font-size:14px;font-weight:600;
+  cursor:pointer;background:#fff;color:var(--f8-red);border:1.5px solid var(--f8-red);
+  border-radius:9px;padding:8px 16px;
+}
+.f8 .f8-cbtn:hover{background:var(--f8-red);color:#fff}
+.f8 .f8-cbtn-on{background:var(--f8-red);color:#fff}
+.f8 .f8-cbtn-on:hover{background:var(--f8-red-d);border-color:var(--f8-red-d)}
+
+/* ---------- le bac de comparaison ---------- */
+.f8-cbac{
+  background:var(--f8-card);border:2px solid var(--f8-blue);border-radius:var(--f8-r);
+  padding:18px;margin:0 0 22px;
+}
+.f8-cbtete{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;margin-bottom:12px}
+.f8-cbtete h2{margin:0;font-size:19px}
+.f8 .f8-cvider{font:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  background:transparent;color:var(--f8-blue);border:1.5px solid var(--f8-line);
+  border-radius:9px;padding:7px 14px}
+.f8 .f8-cvider:hover{border-color:var(--f8-blue)}
+.f8-ctab th[scope="col"]{min-width:200px}
+.f8-ctab .f8-ccoin{min-width:150px}
+
+/* ---------- tableaux (partagés par taux et comparaison) ---------- */
+/* Un tableau large doit défiler DANS son cadre. Sans ce conteneur c'est la
+   page entière qui prend une barre horizontale sur mobile. */
+.f8-tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--f8-line);
+  border-radius:var(--f8-r);background:#fff}
+.f8-tt{border-collapse:collapse;width:100%;font-size:14.5px}
+.f8-tt th,.f8-tt td{text-align:start;padding:12px 14px;border-bottom:1px solid var(--f8-line);
+  vertical-align:top}
+.f8-tt thead th{background:#eef7f2;color:var(--f8-ink);font-size:13px;font-weight:700;
+  white-space:nowrap;border-bottom:2px solid var(--f8-line)}
+.f8-tt tbody tr:last-child th,.f8-tt tbody tr:last-child td{border-bottom:0}
+.f8-tt tbody th[scope="row"]{font-weight:600;color:var(--f8-ink)}
+.f8 .f8-num{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}
+.f8-tnom{display:block}
+.f8-tnote{display:block;font-weight:400;font-size:13px;color:var(--f8-mut);margin-top:4px;
+  max-width:52ch}
+.f8-tdate{white-space:nowrap;color:var(--f8-ink-2)}
+.f8-tcode a{font-size:12.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- taux : fraîcheur, sections ---------- */
+.f8-frais{background:#eef7f2;border:1px solid var(--f8-line);border-inline-start:4px solid var(--f8-blue);
+  border-radius:var(--f8-r);padding:15px 18px;margin-bottom:22px}
+.f8-frais strong{display:block;font-size:14px;margin-bottom:4px;color:var(--f8-ink)}
+.f8-frais p{margin:0;font-size:14px;color:var(--f8-ink-2)}
+.f8-tsec{margin:0 0 34px}
+.f8-tsec h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:6px}
+.f8-tsec>.f8-muted{margin-bottom:14px;max-width:70ch}
+
+/* ---------- simulateur ---------- */
+.f8-sim{background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:22px;margin:0 0 30px}
+.f8-sim h2{font-size:21px;margin-bottom:6px}
+.f8-sim>.f8-muted{max-width:70ch}
+.f8-simg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 18px}
+.f8-simf{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f8-simf label{font-size:13px;font-weight:600;color:var(--f8-ink-2)}
+.f8 .f8-simf input{width:100%;min-width:0;font:inherit;font-size:16px;color:var(--f8-ink);
+  background:#fff;border:1px solid var(--f8-line);border-radius:8px;padding:10px 12px;
+  font-variant-numeric:tabular-nums}
+.f8 .f8-simf input:focus{outline:2px solid var(--f8-blue);outline-offset:1px}
+.f8-simr{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.f8-simc{background:#f2f9f5;border:1px solid var(--f8-line);border-radius:10px;padding:13px 15px;
+  display:flex;flex-direction:column;gap:5px;min-width:0}
+.f8-simc-fort{background:var(--f8-blue);border-color:var(--f8-blue)}
+.f8-simk{font-size:12.5px;font-weight:600;color:var(--f8-mut)}
+.f8-simc-fort .f8-simk{color:#e5f4ec}
+.f8-simv{font-size:21px;font-variant-numeric:tabular-nums;color:var(--f8-ink);line-height:1.2}
+.f8-simc-fort .f8-simv{color:#fff}
+.f8-siminv{grid-column:1/-1;margin:0;color:#8a3d13;font-weight:600}
+.f8-simn{font-size:13px;margin:16px 0 0;max-width:78ch}
+
+/* ---------- produits, état vide ---------- */
+.f8-pfam{margin:0 0 20px;padding:0 0 18px;border-bottom:1px solid var(--f8-line)}
+.f8-pfam:last-of-type{border-bottom:0}
+.f8-pfam h3{font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.f8-pvol{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  background:#e7eef9;color:#204070;border:1px solid #cddcf1;border-radius:99px;padding:3px 9px}
+.f8-pfam>.f8-muted{margin-bottom:10px;font-size:14px}
+.f8-vide{background:#fbfaf6;border:1px dashed #ddd2b6;border-radius:10px;padding:14px 16px}
+.f8-vide strong{display:block;font-size:14px;color:#6b4c10;margin-bottom:5px}
+.f8-pcol{margin:0;font-size:13.5px;color:var(--f8-ink-2)}
+.f8-pourquoi{background:#fff;border:1px solid var(--f8-line);border-inline-start:4px solid #8a5f13;
+  border-radius:var(--f8-r);padding:16px 18px;margin:18px 0 0;font-size:14.5px;color:var(--f8-ink-2)}
+.f8-avis{background:#fff;border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:14px 17px;font-size:14px;color:var(--f8-ink-2);margin:0 0 30px}
+
+@media (max-width:1080px){
+  .f8-cfiltres{grid-template-columns:repeat(3,1fr)}
+  .f8-cliste{grid-template-columns:repeat(2,1fr)}
+  .f8-simr{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .f8-cfiltres{grid-template-columns:1fr;padding:15px}
+  .f8-cliste{grid-template-columns:1fr}
+  .f8-simg{grid-template-columns:1fr}
+  .f8-simr{grid-template-columns:1fr}
+  .f8-tt th,.f8-tt td{padding:10px 12px}
+}
+
+/* Fraicheur d'une ligne de produit. La date de verification est deja affichee ;
+   ces deux mentions disent ce que la date seule ne dit pas — qu'elle a vieilli,
+   ou que l'offre a une fin annoncee. */
+.f8-vieux,.f8-expire{display:block;font-size:12px;margin-top:3px;font-weight:600}
+.f8-vieux{color:#8a5f13}
+.f8-expire{color:var(--f8-mut);font-weight:400}
+/* Une case vide ne veut pas dire « gratuit » : elle veut dire qu'on n'a pas
+   releve le chiffre. Un tiret laisserait le doute. */
+.f8-nc{color:var(--f8-mut);font-style:italic;font-size:13px}
+
+/* ==================================================================
+   COUCHE VISUELLE — 1.7.0
+   ------------------------------------------------------------------
+   Demande du client : « met l'accent sur l'esthétique, elle manque
+   d'effet visuel ». Tout ce qui suit est ajouté PAR-DESSUS la mise en
+   page existante — aucune règle plus haut n'est réécrite, donc rien
+   ne bouge de place et rien ne peut casser une page que je ne
+   regarde pas ce soir.
+
+   Trois règles que je me suis données :
+
+   1. AUCUNE animation ne déplace le contenu après coup. Tout ce qui
+      apparaît occupe déjà sa place ; on ne joue que sur l'opacité et
+      sur quelques pixels de translation. Un bloc qui pousse le texte
+      pendant qu'on le lit est une régression, pas un effet.
+   2. Les fonds décoratifs restent SOUS le seuil de contraste. Le
+      bandeau garde sa couleur pleine dessous : les voiles ajoutés
+      sont sombres ou très faibles, jamais un blanc qui éclaircirait
+      le fond sous du texte blanc. C'est exactement l'erreur qui
+      avait fait tomber le sélecteur de langue à 4,31.
+   3. prefers-reduced-motion coupe TOUT. Pas « ralentit » : coupe.
+      Le rendu final est identique, seul le chemin pour y arriver
+      disparaît.
+   ================================================================== */
+
+.f8{
+  --f8-sh-1:0 1px 2px rgba(13,31,22,.05);
+  --f8-sh-2:0 4px 14px rgba(13,31,22,.07);
+  --f8-sh-3:0 14px 34px rgba(9,42,26,.13);
+  --f8-ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---------- 1. relief des bandeaux ----------------------------------
+   Un aplat de dégradé linéaire, c'est ce qu'il y avait : plat. On
+   superpose deux halos radiaux décentrés, un quadrillage très léger et
+   une ombre interne en bas. Le tout est en background-IMAGE, donc la
+   couleur pleine reste dessous et le contraste mesuré ne change pas. */
+.f8-mast,.f8-hero,.f8-pband{position:relative;isolation:isolate;overflow:hidden}
+.f8-mast::before,.f8-hero::before,.f8-pband::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(920px 420px at 84% -12%,rgba(126,231,178,.20),transparent 62%),
+    radial-gradient(680px 380px at 8% 108%,rgba(0,0,0,.26),transparent 66%),
+    radial-gradient(420px 260px at 42% 120%,rgba(0,0,0,.14),transparent 70%);
+}
+/* Le quadrillage : une seule SVG en ligne, 40x40, répétée. Aucun
+   téléchargement, aucun blocage de rendu. Il est à 6 % — visible en
+   biais, invisible derrière une lettre. */
+.f8-mast::after,.f8-hero::after,.f8-pband::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M40 0H0v40' fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='1'/%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(105deg,transparent 6%,#000 42%,#000 74%,transparent 98%);
+  mask-image:linear-gradient(105deg,transparent 6%,#000 42%,#000 74%,transparent 98%);
+}
+/* Un filet clair en bas du bandeau : la limite avec la page blanche
+   devient une arête nette au lieu d'une coupure franche. */
+.f8-mast,.f8-hero{box-shadow:inset 0 -1px 0 rgba(255,255,255,.16)}
+
+.f8-mast h1,.f8-hero h1{text-wrap:balance}
+/* La barre de navigation flotte sur un socle sombre : elle se détache
+   du dégradé sans éclaircir quoi que ce soit sous du texte. */
+.f8-nav{position:relative;margin-top:26px;padding-top:6px}
+.f8-nav::before{content:"";position:absolute;inset:auto 0 0;height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,.32),rgba(255,255,255,.06) 70%,transparent)}
+.f8-nav a{transition:background .18s var(--f8-ease),color .18s var(--f8-ease),
+  transform .18s var(--f8-ease)}
+.f8-nav a:hover{transform:translateY(-1px)}
+/* L'onglet courant : un trait plein, pas juste une nuance de fond. */
+.f8-nav a[aria-current="page"]{background:rgba(0,0,0,.20);color:#fff;
+  box-shadow:inset 0 -3px 0 rgba(255,255,255,.72)}
+
+/* La barre de recherche du héros posée sur le bandeau mérite une vraie
+   élévation, c'est elle l'objet principal de la page d'accueil. */
+.f8-hero-s{transition:box-shadow .22s var(--f8-ease),transform .22s var(--f8-ease)}
+.f8-hero-s:focus-within{box-shadow:0 14px 40px rgba(6,40,24,.30),0 0 0 4px rgba(255,255,255,.28);
+  transform:translateY(-1px)}
+
+/* ---------- 2. cartes : élévation et liseré ------------------------
+   Le liseré se dessine par transform sur un pseudo-élément déjà en
+   place : il ne réserve pas de hauteur, donc il ne décale rien. */
+.f8-card,.f8-cart,.f8 a.f8-porte,.f8 a.f8-duo-c,.f8-devis-c,.f8-etapes li,.f8 a.f8-org-row{
+  position:relative;overflow:hidden;
+  transition:transform .2s var(--f8-ease),box-shadow .2s var(--f8-ease),
+    border-color .2s var(--f8-ease);
+}
+.f8-card::before,.f8-cart::before,.f8 a.f8-porte::before,.f8 a.f8-duo-c::before,.f8-devis-c::before{
+  content:"";position:absolute;inset:0 0 auto;height:3px;
+  background:linear-gradient(90deg,var(--f8-red),#3fae7a 62%,#8fd9b4);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .28s var(--f8-ease);
+}
+.f8-card:hover,.f8-cart:hover,.f8 a.f8-porte:hover,.f8 a.f8-duo-c:hover,.f8-devis-c:hover{
+  transform:translateY(-3px);box-shadow:var(--f8-sh-3);border-color:#a9cfba;
+}
+.f8-card:hover::before,.f8-cart:hover::before,.f8 a.f8-porte:hover::before,
+.f8 a.f8-duo-c:hover::before,.f8-devis-c:hover::before{transform:scaleX(1)}
+.f8-etapes li:hover,.f8 a.f8-org-row:hover{transform:translateX(3px)}
+
+/* Le numéro d'étape prend du volume — c'est le seul repère de lecture
+   dans une liste de six lignes identiques. */
+.f8-etnum{background-image:linear-gradient(140deg,#17905b,#0d5c39);
+  box-shadow:0 3px 10px rgba(13,92,57,.34)}
+
+/* ---------- 3. boutons ---------------------------------------------- */
+.f8 .f8-btn,.f8 .f8-pbtn,.f8 .f8-cbtn,.f8 a.f8-side-cta{
+  position:relative;overflow:hidden;
+  transition:background .18s var(--f8-ease),transform .14s var(--f8-ease),
+    box-shadow .18s var(--f8-ease),color .18s var(--f8-ease),border-color .18s var(--f8-ease);
+}
+.f8 .f8-btn{background-image:linear-gradient(180deg,rgba(255,255,255,.13),rgba(0,0,0,.05));
+  box-shadow:0 2px 6px rgba(13,92,57,.22)}
+.f8 .f8-btn:hover,.f8 a.f8-side-cta:hover{transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(13,92,57,.28)}
+/* :active rend le clic physique. Sans lui, un bouton qui met 300 ms à
+   répondre a l'air cassé. */
+.f8 .f8-btn:active,.f8 .f8-pbtn:active,.f8 .f8-cbtn:active,.f8 a.f8-side-cta:active{
+  transform:translateY(0);box-shadow:0 1px 3px rgba(13,92,57,.30)}
+/* Le reflet qui traverse le bouton au survol. Purement décoratif, donc
+   aria-hidden par construction : c'est un pseudo-élément. */
+.f8 .f8-btn::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.34) 50%,transparent 62%);
+  transform:translateX(-130%);transition:transform .55s var(--f8-ease)}
+.f8 .f8-btn:hover::after{transform:translateX(130%)}
+
+/* Un anneau de focus visible partout, y compris sur les boutons verts.
+   Deux couches : blanche puis verte, pour rester visible sur fond clair
+   comme sur le bandeau. */
+.f8 a:focus-visible,.f8 button:focus-visible,.f8 input:focus-visible,
+.f8 select:focus-visible,.f8 textarea:focus-visible{
+  outline:2px solid #0b5132;outline-offset:2px;
+  box-shadow:0 0 0 4px rgba(255,255,255,.85);border-radius:6px}
+
+/* ---------- 4. pastilles et étiquettes ------------------------------ */
+.f8-pill,.f8-cmeta span{transition:transform .16s var(--f8-ease),box-shadow .16s var(--f8-ease)}
+.f8-card:hover .f8-pill,.f8-cart:hover .f8-cmeta span{transform:translateY(-1px)}
+.f8 .f8-tag,.f8 .f8-chip{transition:transform .16s var(--f8-ease),border-color .16s var(--f8-ease),
+  background .16s var(--f8-ease),color .16s var(--f8-ease)}
+.f8 .f8-tag:hover,.f8 .f8-chip:hover{transform:translateY(-2px)}
+.f8-score{background-image:linear-gradient(140deg,#17905b,#0d5c39);
+  box-shadow:0 2px 8px rgba(13,92,57,.30)}
+
+/* ---------- 5. apparition au défilement -----------------------------
+   L'élément est POSÉ, visible et lisible, tant que le script n'a pas
+   tourné : la classe -off n'est ajoutée que par JS. Un lecteur sans
+   JavaScript, ou dont le script échoue, voit la page entière — il ne
+   voit jamais une page blanche à cause d'une animation. */
+.f8-rev-off{opacity:0;transform:translateY(14px)}
+.f8-rev{transition:opacity .5s var(--f8-ease),transform .5s var(--f8-ease)}
+
+/* ---------- 6. jauge de défilement ----------------------------------- */
+.f8-prog{position:fixed;inset:0 0 auto;height:3px;z-index:9999;pointer-events:none;
+  background:linear-gradient(90deg,#0d5c39,#17905b 45%,#6fd7a6);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .08s linear}
+
+/* ---------- 7. courbes des taux --------------------------------------- */
+.f8-tsp{min-width:150px}
+.f8-spw{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.f8 .f8-sp{display:block;width:116px;height:30px;overflow:visible}
+.f8-sp-l{fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke}
+.f8-sp-a{stroke:none;opacity:.14}
+.f8-sp-p{stroke:#fff;stroke-width:1.2}
+.f8-sp-up .f8-sp-l,.f8-sp-up .f8-sp-p{stroke:#a2431a}
+.f8-sp-up .f8-sp-a,.f8-sp-up .f8-sp-p{fill:#c2551f}
+.f8-sp-dn .f8-sp-l,.f8-sp-dn .f8-sp-p{stroke:#0e6b3f}
+.f8-sp-dn .f8-sp-a,.f8-sp-dn .f8-sp-p{fill:#12794b}
+.f8-sp-flat .f8-sp-l,.f8-sp-flat .f8-sp-p{stroke:#5c7166}
+.f8-sp-flat .f8-sp-a,.f8-sp-flat .f8-sp-p{fill:#5c7166}
+.f8-sp-b{font-size:11.5px;color:var(--f8-mut);font-variant-numeric:tabular-nums;
+  letter-spacing:.01em}
+.f8-sp-d{font-size:11.5px;color:var(--f8-mut);white-space:nowrap}
+.f8-spn{font-size:13px;margin:10px 0 0;max-width:88ch}
+/* Le tracé se dessine de gauche à droite au premier affichage. La
+   longueur exacte est posée par le script ; 400 est un repli large. */
+.f8-sp-anim .f8-sp-l{stroke-dasharray:var(--f8-sp-len,400);
+  stroke-dashoffset:var(--f8-sp-len,400);
+  animation:f8-trace 1.1s var(--f8-ease) forwards}
+.f8-sp-anim .f8-sp-a,.f8-sp-anim .f8-sp-p{opacity:0;animation:f8-fade .5s .75s forwards}
+.f8-sp-anim .f8-sp-a{animation-name:f8-fade-a}
+@keyframes f8-trace{to{stroke-dashoffset:0}}
+@keyframes f8-fade{to{opacity:1}}
+@keyframes f8-fade-a{to{opacity:.14}}
+
+/* Arolax pose « .arolax-base table{white-space:nowrap} ». Nos tableaux portent
+   des notes de deux lignes dans la colonne de gauche : sous nowrap elles ne se
+   coupent jamais et traversent toute la rangée, par-dessus la valeur et la
+   courbe. Le sélecteur du thème vaut (0,1,1) ; « .f8-tt » seul vaut (0,1,0) et
+   perdrait. D'où « .f8 .f8-tt ». Le nowrap reste posé, ligne par ligne, là où
+   il est voulu : la valeur, la date, les en-têtes. */
+.f8 .f8-tt{white-space:normal}
+.f8 .f8-tt thead th,.f8 .f8-tt td.f8-num,.f8 .f8-tt td.f8-tdate{white-space:nowrap}
+
+/* Le chiffre est ce qu'on vient chercher sur cette page : il porte le poids
+   typographique, pas une pastille. */
+.f8-tt td.f8-num strong{font-size:18px;font-weight:800;letter-spacing:-.015em;
+  color:var(--f8-ink);line-height:1.2}
+.f8-tt td.f8-num{vertical-align:middle}
+
+/* ---------- 8. lignes de tableau -------------------------------------- */
+.f8-tt tbody tr{transition:background .15s var(--f8-ease)}
+.f8-tt tbody tr:hover{background:#f4fbf7}
+/* Pas d'en-tête collant ici : .f8-tw porte overflow-x:auto, ce qui rend
+   aussi l'axe vertical scrollable au sens de la spec. Un thead sticky s'y
+   accrocherait au cadre du tableau et pas à la fenêtre — donc ne
+   collerait jamais, tout en ajoutant une barre de défilement verticale
+   parasite. On se contente d'un liseré sous l'en-tête. */
+.f8-tt thead th{box-shadow:inset 0 -2px 0 var(--f8-line)}
+
+/* ---------- 9. simulateur : la part des intérêts ----------------------
+   Une barre vaut mieux qu'un quatrième chiffre : « 39 643 $ d'intérêts »
+   ne dit rien, « les intérêts occupent ce sixième-là de la barre » se
+   lit d'un coup d'œil. Les largeurs sont écrites par le script à partir
+   des mêmes nombres que les cases au-dessus. */
+.f8-simpart{margin:16px 0 0}
+.f8-simbar{display:flex;height:14px;border-radius:99px;overflow:hidden;
+  background:#e6f1ea;border:1px solid var(--f8-line)}
+.f8-simbar span{display:block;height:100%;transition:width .45s var(--f8-ease)}
+.f8-simbar .f8-simcap{background:linear-gradient(180deg,#17905c,#0e6440)}
+.f8-simbar .f8-simint{background:linear-gradient(180deg,#c98a2a,#a76d15)}
+.f8-simleg{display:flex;flex-wrap:wrap;gap:6px 20px;margin:8px 0 0;font-size:13px;
+  color:var(--f8-ink-2)}
+.f8-simleg b{font-weight:700;font-variant-numeric:tabular-nums}
+.f8-simleg i{display:inline-block;width:10px;height:10px;border-radius:3px;
+  margin-inline-end:7px;vertical-align:-1px}
+.f8-simleg .f8-lcap{background:#0e6440}
+.f8-simleg .f8-lint{background:#a76d15}
+/* La valeur qui vient de changer clignote une fois — sinon on modifie
+   un champ et rien n'a l'air de bouger dans la grille de résultats. */
+.f8-simv{transition:color .2s var(--f8-ease)}
+.f8-maj{animation:f8-maj .6s var(--f8-ease)}
+@keyframes f8-maj{
+  0%{transform:translateY(-3px);opacity:.35}
+  100%{transform:translateY(0);opacity:1}
+}
+.f8-simc{transition:box-shadow .2s var(--f8-ease),transform .2s var(--f8-ease)}
+.f8-simc-fort{background-image:linear-gradient(140deg,#17905c,#0d5c39);
+  box-shadow:0 8px 22px rgba(13,92,57,.26)}
+
+/* ---------- 10. compteurs -------------------------------------------- */
+.f8-chiffres b,.f8-pmes-c b,.f8-ccount,.f8-count{font-variant-numeric:tabular-nums}
+.f8-chiffres{background-image:
+  radial-gradient(560px 200px at 12% -40%,rgba(20,128,79,.09),transparent 70%)}
+.f8-chiffres div{position:relative;padding:6px 4px}
+.f8-chiffres div+div::before{content:"";position:absolute;inset:12% auto 12% -7px;
+  width:1px;background:var(--f8-line)}
+.f8-chiffres b{background:linear-gradient(140deg,#0d5c39,#1a9c66 70%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- 11. bacs et encadrés --------------------------------------- */
+.f8-cbac{box-shadow:var(--f8-sh-2)}
+.f8-frais,.f8-avert,.f8-pourquoi{position:relative;overflow:hidden}
+.f8-frais::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(320px 120px at 96% 0%,rgba(20,128,79,.10),transparent 70%)}
+.f8-filters,.f8-cfiltres{box-shadow:var(--f8-sh-2)}
+.f8-cvide,.f8-ctronq,.f8-vide{transition:border-color .2s var(--f8-ease)}
+
+/* ---------- 12. pages de pilier ----------------------------------------- */
+/* L'en-tête de pilier est CLAIR : le quadrillage blanc des bandeaux verts y
+   serait invisible. Même dessin, encre verte, encore plus discret — et
+   .f8-ph a déjà overflow:hidden, donc rien ne dépasse. */
+.f8-ph::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Ccircle cx='2' cy='2' r='1.2' fill='%230e6b3f' fill-opacity='.16'/%3E%3C/svg%3E");
+  -webkit-mask-image:radial-gradient(660px 340px at 86% 8%,#000,transparent 72%);
+  mask-image:radial-gradient(660px 340px at 86% 8%,#000,transparent 72%)}
+/* .f8-ph .f8-wrap est déjà position:relative ; on le remet au-dessus du motif
+   pour que le texte reste cliquable et sélectionnable. */
+.f8-ph .f8-wrap{z-index:1}
+
+.f8-pcap b{position:relative}
+.f8-pcap b::after{content:"";position:absolute;inset:-2px auto auto 0;height:2px;width:0;
+  background:var(--f8-red);transition:width .35s var(--f8-ease)}
+.f8-pcap:hover b::after{width:100%}
+.f8-pmes-c{transition:background .2s var(--f8-ease)}
+.f8-pmes-c:hover{background:#fff}
+.f8-psteps li{position:relative;transition:background .2s var(--f8-ease)}
+.f8-psteps li:hover{background:#f5fbf8}
+
+/* ---------- 13. arrêt complet des animations ----------------------------
+   « reduce » ne veut pas dire « plus lent ». Tout ce qui bouge s'arrête,
+   et l'état final est celui qu'on aurait obtenu à la fin. */
+@media (prefers-reduced-motion: reduce){
+  .f8 *,.f8 *::before,.f8 *::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .f8-rev-off{opacity:1;transform:none}
+  .f8-sp-anim .f8-sp-l{stroke-dashoffset:0}
+  .f8-sp-anim .f8-sp-a{opacity:.14}
+  .f8-sp-anim .f8-sp-p{opacity:1}
+  .f8 .f8-btn::after{display:none}
+  .f8-prog{display:none}
+}
+
+/* ================================================================
+   14. DIRECTION VISUELLE — « l'architecture et la finance »
+   ================================================================
+   Le client a dit deux choses : qu'il n'était pas satisfait du rendu, et
+   qu'il aimait l'architecture et la finance. La maquette d'intention est en
+   ligne (…/8funder-demo/aspect/). Cette section applique cette direction à
+   TOUTES les pages de l'extension, d'un seul endroit.
+
+   CE QUI NE CHANGE PAS : aucun mot, aucun chiffre, aucun gabarit PHP. Tout
+   ce qui suit est de la feuille de style posée sur le balisage existant —
+   donc une page ajoutée demain hérite du même vocabulaire sans rien faire.
+
+   CE QUI CHANGE, et pourquoi :
+
+   1. Le vert cesse d'être un APLAT et devient un ACCENT. Un bandeau vert qui
+      occupe le tiers de l'écran donne au vert toute l'autorité de la page ;
+      il ne reste plus rien pour signaler ce qui compte vraiment. Sur papier
+      blanc, le même vert redevient un signal.
+   2. La hiérarchie passe par la TYPOGRAPHIE et par des FILETS, pas par des
+      boîtes. Quatre encadrés identiques se valent tous : l'œil n'a aucune
+      raison d'aller à l'un plutôt qu'à l'autre. Un filet fin coûte un pixel
+      et sépare aussi bien qu'un cadre à ombre portée.
+   3. Les listes de programmes deviennent des RANGÉES à colonne de montants,
+      alignés à droite en chasse fixe. C'est la seule disposition qui permet
+      de comparer 1 611 montants verticalement ; une grille de cartes rend
+      cette comparaison impossible, quel que soit son soin.
+
+   Le contraste a été vérifié après coup, pas supposé : encre #0d1f16 sur
+   papier #fbfbfa = 16,4:1 ; vert foncé #0d5c39 sur blanc = 7,4:1.
+*/
+
+.f8{
+  --f8-papier:#fbfbfa;
+  --f8-filet:#dcdedb;       /* la réglure fine */
+  --f8-filet-fort:#101614;  /* le filet d'en-tête, épais */
+  --f8-vert-f:#0d5c39;      /* le vert en petit corps, sur blanc */
+  background:var(--f8-papier);
+}
+
+/* ---------- 14.1 les bandeaux : du papier, pas un aplat --------------- */
+/* Les halos et le quadrillage blanc de la section 1 étaient dessinés POUR un
+   fond vert. Sur du papier ils sont soit invisibles, soit sales. On les
+   éteint plutôt que de les repeindre. */
+.f8-mast::before,.f8-mast::after,.f8-hero::before,.f8-hero::after{display:none}
+
+.f8-mast,.f8-hero{
+  background:var(--f8-papier);background-image:none;color:var(--f8-ink);
+  box-shadow:none;border-bottom:1px solid var(--f8-filet);
+}
+.f8-mast{padding:0;margin-bottom:34px}
+.f8-hero{padding:0}
+
+/* Le filet épais qui ouvre la page. Il est posé en absolu et calé sur les
+   marges du texte : une bordure sur .f8-wrap déborderait des 20 px de
+   padding et ne serait plus alignée sur le titre. */
+.f8-mast .f8-wrap,.f8-hero .f8-wrap{position:relative}
+/* Le filet est BICOLORE : un talon vert, puis l'encre. C'est le repère de
+   marge d'un plan — et c'est la seule façon de garder le vert présent en haut
+   de page sans écrire un mot que le client n'a pas validé. */
+.f8-mast .f8-wrap::before,.f8-hero .f8-wrap::before{
+  content:"";position:absolute;left:20px;right:20px;top:0;height:3px;
+  background:linear-gradient(90deg,var(--f8-vert-f) 0 58px,var(--f8-filet-fort) 58px);
+}
+.f8-mast .f8-wrap{padding-top:34px}
+.f8-hero .f8-wrap{padding-top:40px;padding-bottom:48px}
+
+.f8-hero h1{
+  color:var(--f8-ink);font-weight:800;letter-spacing:-.028em;line-height:1.06;
+  font-size:clamp(32px,5.2vw,62px);max-width:16ch;margin:0 0 20px;
+}
+.f8-mast h1{
+  color:var(--f8-ink);font-weight:800;letter-spacing:-.026em;line-height:1.08;
+  font-size:clamp(28px,4.2vw,50px);max-width:20ch;
+}
+.f8-hero-l,.f8-mast .f8-lede{color:var(--f8-mut)}
+.f8-hero-n{color:var(--f8-mut)}
+.f8-crumb{color:var(--f8-mut)}
+.f8 .f8-crumb a{color:var(--f8-vert-f)}
+.f8-crumb span{color:var(--f8-mut)}
+
+/* La recherche : un rectangle franc à filet d'encre. Le bouton est encre et
+   non vert — sur une page où le vert est redevenu un accent, le vert est
+   réservé à ce qui est une information, pas à ce qui est un meuble. */
+.f8-hero-s{
+  border-radius:0;border:1px solid var(--f8-filet-fort);box-shadow:none;
+  max-width:660px;transform:none;align-items:stretch;
+}
+/* L'ombre portée du héros supposait un fond vert ; sur papier elle salit. On
+   la retire — mais PAS l'indication de focus : un champ qu'on ne voit pas
+   sélectionné n'est plus utilisable au clavier. Elle devient un liseré vert,
+   à l'intérieur du cadre pour ne rien décaler. */
+.f8-hero-s:hover{box-shadow:none;transform:none}
+.f8-hero-s:focus-within{box-shadow:inset 0 0 0 2px var(--f8-vert-f);transform:none}
+.f8 .f8-hero-s .f8-btn,.f8 .f8-hero-s .f8-btn-lg{
+  border-radius:0;background:var(--f8-filet-fort);margin-inline-end:-14px;
+}
+.f8 .f8-hero-s .f8-btn:hover{background:var(--f8-vert-f)}
+
+/* Les onglets du bandeau : un soulignement, pas une tuile. */
+.f8-nav a{color:var(--f8-mut);border-radius:0;padding:11px 2px;margin-inline-end:18px;
+  border-bottom:2px solid transparent}
+.f8-nav a:hover{background:none;color:var(--f8-ink);border-bottom-color:var(--f8-filet-fort)}
+/* L'onglet courant : un soulignement d'encre. La pastille grise héritée du
+   bandeau vert (rgba(0,0,0,.20)) devient une tache sur du papier. */
+.f8-nav a[aria-current="page"]{background:none;color:var(--f8-ink);font-weight:800;
+  border-bottom-color:var(--f8-filet-fort);box-shadow:none}
+.f8-nav a:hover{transform:none}
+.f8-nav a.f8-lang{background:none;color:var(--f8-vert-f);border:1px solid var(--f8-filet);
+  border-radius:0;margin-inline-end:0}
+.f8-nav a.f8-lang:hover{background:none;color:var(--f8-ink);border-color:var(--f8-filet-fort)}
+
+/* ---------- 14.2 les portes : une liste réglée et numérotée ----------- */
+/* Le numéro vient d'un compteur CSS : le balisage n'a pas à le connaître, et
+   ajouter une porte en PHP renumérote toute la liste sans y penser. */
+.f8-portes{display:block;border-top:1px solid var(--f8-filet);margin:0 0 40px;
+  counter-reset:f8porte}
+.f8 a.f8-porte{
+  display:grid;grid-template-columns:52px 1fr;gap:4px 16px;align-items:baseline;
+  background:none;border:0;border-bottom:1px solid var(--f8-filet);border-radius:0;
+  padding:19px 0;box-shadow:none;transform:none;counter-increment:f8porte;
+}
+.f8 a.f8-porte:hover{background:#fff;border-color:var(--f8-filet);box-shadow:none;transform:none}
+/* ATTENTION : ce ::before EXISTE DÉJÀ plus haut (§ relief au survol). Il y est
+   un filet de 3 px en position absolue, replié par transform:scaleX(0). Ne
+   redéfinir que « content » ne suffit donc pas : le compteur s'affichait, mais
+   dans une boîte de 3 px de haut, hors flux et à l'échelle zéro — donc
+   invisible, sans qu'aucune erreur ne soit levée. On remet la boîte à plat
+   AVANT de lui donner son contenu. */
+.f8 a.f8-porte::before{
+  content:counter(f8porte,decimal-leading-zero);
+  position:static;inset:auto;height:auto;background:none;transform:none;
+  grid-column:1;grid-row:1 / span 2;
+  font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--f8-vert-f);
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.f8 a.f8-porte:hover::before{transform:none}
+/* overflow:hidden venait avec le relief ; sur une rangée réglée il coupe les
+   jambages des descendantes de la dernière ligne. */
+.f8 a.f8-porte,.f8-etapes li,.f8-grid .f8-card{overflow:visible}
+.f8 a.f8-porte b{grid-column:2;font-size:18px}
+.f8 a.f8-porte span{grid-column:2;color:var(--f8-mut)}
+
+/* ---------- 14.3 les chiffres : une réglure comptable ----------------- */
+/* Un chiffre mesuré en base n'a pas besoin d'un dégradé pour être crédible.
+   Il a besoin d'être GRAND, en encre, et en chasse fixe pour que la colonne
+   se lise. On retire le fond, le cadre, le halo et le texte en dégradé. */
+.f8-chiffres{
+  background:none;background-image:none;border:0;border-radius:0;padding:0;gap:0;
+  border-top:3px solid var(--f8-filet-fort);border-bottom:1px solid var(--f8-filet);
+  margin:0 0 40px;
+}
+.f8-chiffres div{text-align:start;padding:26px 0 28px;border-left:1px solid var(--f8-filet)}
+.f8-chiffres div:first-child{border-left:0}
+.f8-chiffres div+div{padding-inline-start:26px}
+.f8-chiffres div+div::before{display:none}   /* l'ancien séparateur en absolu */
+.f8-chiffres b{
+  background:none;-webkit-background-clip:border-box;background-clip:border-box;
+  color:var(--f8-ink);-webkit-text-fill-color:currentColor;
+  font-size:clamp(30px,4.2vw,50px);line-height:1;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.f8-chiffres span{display:block;margin-top:9px;color:var(--f8-mut)}
+
+/* ---------- 14.4 les programmes : des rangées, pas des cartes --------- */
+/* .f8-grid seulement : .f8-card sert aussi ailleurs, isolée, où une rangée
+   n'aurait pas de colonne voisine à laquelle s'aligner. */
+.f8-grid{display:block;border-top:3px solid var(--f8-filet-fort)}
+.f8-grid .f8-card{
+  display:grid;grid-template-columns:1fr minmax(0,190px);gap:3px 28px;
+  background:none;border:0;border-bottom:1px solid var(--f8-filet);border-radius:0;
+  padding:17px 0;
+}
+/* transform:none : le relief au survol soulevait la carte de 3 px. Sur une
+   rangée réglée, ce saut décolle la ligne de son filet à chaque passage de
+   souris — sur une liste de 20 résultats, la page entière tremble. */
+.f8-grid .f8-card:hover{background:#fff;border-color:var(--f8-filet);box-shadow:none;transform:none}
+/* Le filet de survol du § relief se replie à scaleX(0) : on le laisse, mais en
+   vert plat et calé sur la LIGNE, pas sur un cadre qui n'existe plus. */
+.f8-grid .f8-card::before{background:var(--f8-vert-f);height:2px}
+.f8-grid .f8-card > *{grid-column:1}
+.f8-grid .f8-card h3{font-size:19px;letter-spacing:-.012em}
+/* La ligne de tête tient les DEUX colonnes, et le ressort pousse la
+   juridiction contre le bord droit. C'est elle la colonne comparable de cette
+   page : le palier et la province sont renseignés sur les 1 611 fiches, alors
+   que la source n'en porte AUCUN montant. Aligner ce qui est toujours là. */
+.f8-grid .f8-card .f8-card-top{grid-column:1 / -1;margin-bottom:2px}
+.f8-grid .f8-card .f8-scope{margin-inline-start:auto;text-align:end}
+/* Le montant, QUAND il y en a un : colonne de droite, ligne 2, en chasse
+   fixe. Ligne fixée en dur et non « la dernière » : le résumé, l'organisme et
+   les étiquettes sont facultatifs, donc le numéro de la dernière ligne change
+   d'une fiche à l'autre et la colonne se désalignerait.
+   MESURÉ : le relevé de 1 611 programmes ne contient aucun champ de montant —
+   0 fiche sur 1 611. Cette règle ne sert donc à rien aujourd'hui ; elle est
+   écrite pour le jour où l'import en apportera, et l'import les accepte
+   déjà. La page ne réserve pas d'espace vide en attendant. */
+.f8-grid .f8-card .f8-amount{
+  grid-column:2;grid-row:3;align-self:start;text-align:end;margin:0;
+  font-size:17px;font-weight:800;color:var(--f8-ink);letter-spacing:-.015em;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+/* Le lien de fin de carte passe dans la colonne de droite, sous le montant :
+   quand un programme n'annonce pas de montant — c'est la majorité — cette
+   colonne serait sinon vide sur toute la hauteur de la rangée. Ligne 2 en
+   dur : le résumé, l'organisme et les étiquettes sont tous facultatifs, donc
+   « la dernière ligne » n'est pas au même endroit d'une fiche à l'autre. */
+.f8 .f8-grid .f8-card .f8-more{
+  grid-column:2;grid-row:2;justify-self:end;align-self:start;
+  margin-top:0;padding-top:2px;font-size:13.5px;white-space:nowrap;
+}
+.f8-grid .f8-card .f8-tags{margin-top:7px}
+/* Étiquettes et pastilles carrées, comme le reste du mobilier. */
+.f8 .f8-tag,.f8-pill{border-radius:0}
+.f8 .f8-tag:hover,.f8 .f8-chip:hover{transform:none}
+.f8-card:hover .f8-pill{transform:none}
+
+/* ---------- 14.5 les puces : des étiquettes carrées ------------------- */
+.f8 .f8-chip{border-radius:0;background:#fff;border-color:var(--f8-filet);
+  padding:9px 12px 9px 14px;gap:12px}
+.f8 .f8-chip:hover{border-color:var(--f8-filet-fort);color:var(--f8-ink)}
+.f8 .f8-chip b{background:none;border-radius:0;padding:0 0 0 12px;color:var(--f8-mut);
+  border-inline-start:1px solid var(--f8-filet);
+  font-variant-numeric:tabular-nums lining-nums}
+.f8 .f8-chip:hover b{border-color:var(--f8-filet)}
+
+/* ---------- 14.6 les étapes : réglées, numéro en marge ---------------- */
+.f8-etapes{gap:0;border-top:1px solid var(--f8-filet)}
+.f8-etapes li{background:none;border:0;border-bottom:1px solid var(--f8-filet);
+  border-radius:0;padding:20px 0;gap:16px}
+.f8-etapes li:hover{transform:none;box-shadow:none;background:#fff}
+.f8-etnum{
+  flex:0 0 52px;height:auto;border-radius:0;background:none;color:var(--f8-vert-f);
+  display:block;font-size:12px;font-weight:800;letter-spacing:.08em;padding-top:4px;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.f8-etapes b{font-size:18px}
+
+/* ---------- 14.7 le reste du mobilier -------------------------------- */
+.f8-h2,.f8-browse h2{letter-spacing:-.02em}
+.f8-browse h2{font-size:clamp(20px,2.2vw,27px);margin-bottom:16px}
+.f8-filters{border-radius:0;box-shadow:none;background:#fff;border-color:var(--f8-filet)}
+.f8-search{border-radius:0;border-color:var(--f8-filet)}
+.f8-search:focus-within{border-color:var(--f8-vert-f);box-shadow:none}
+.f8-selects select{border-radius:0;border-color:var(--f8-filet)}
+.f8 .f8-btn{border-radius:0;font-weight:700}
+.f8-empty{border-radius:0;background:#fff;border-style:solid;border-color:var(--f8-filet)}
+.f8-pager .page-numbers{border-radius:0;border-color:var(--f8-filet)}
+.f8-pager .page-numbers.current{background:var(--f8-filet-fort);border-color:var(--f8-filet-fort)}
+.f8-source{background:none;border-top:1px solid var(--f8-filet)}
+.f8-avert{border-radius:0}
+/* Le bandeau d'appel des pages de pilier RESTE vert : c'est désormais le seul
+   aplat de la page, donc c'est lui qu'on voit. Un accent ne fonctionne que
+   s'il est rare — c'était tout le problème de départ. */
+.f8-pband{border-radius:0}
+/* Les chiffres alignés à droite dans les tableaux : même famille que la
+   colonne des montants ci-dessus. */
+.f8 .f8-num,.f8-count{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---------- 14.8 écrans étroits --------------------------------------- */
+@media (max-width:900px){
+  .f8-chiffres{grid-template-columns:1fr}
+  .f8-chiffres div{border-left:0;border-top:1px solid var(--f8-filet);padding:20px 0}
+  .f8-chiffres div:first-child{border-top:0}
+  .f8-chiffres div+div{padding-inline-start:0}
+  /* La colonne des montants n'a plus de place : le montant revient dans le
+     fil, mais garde sa chasse fixe et son poids. */
+  .f8-grid .f8-card{grid-template-columns:1fr}
+  .f8-grid .f8-card .f8-amount{grid-column:1;grid-row:auto;text-align:start}
+  .f8 .f8-grid .f8-card .f8-more{grid-column:1;grid-row:auto;justify-self:start;padding-top:8px}
+}
+@media (max-width:620px){
+  .f8 a.f8-porte{grid-template-columns:34px 1fr;gap:4px 12px}
+  .f8-hero .f8-wrap{padding-top:30px;padding-bottom:36px}
+  .f8 .f8-hero-s .f8-btn,.f8 .f8-hero-s .f8-btn-lg{margin-inline-end:0}
+}
+
+/* ================================================================
+   15. LA FAÇADE — logo, schéma des services, pages de volet
+   ================================================================
+   « met le logo », « il me faut la facade incluant tout les service et séparé
+   en B2B B2C », « les pages schématisé qui presente la société ».
+
+   Le logo n'était posé que sur trois pages de service : le répertoire, les
+   taux, le comparateur, le diagnostic et l'accueil lui-même n'étaient signés
+   par rien. Il est maintenant en tête de CHAQUE page, par f8_logo().
+
+   Le schéma est en HTML, pas en SVG. Une SVG aurait obligé à poser les
+   libellés à des coordonnées fixes ; ils sont bilingues et de longueurs
+   différentes, donc l'anglais se serait chevauché. Ici le texte reste du
+   texte : il se sélectionne, se traduit, se lit à la voix, et se replie seul
+   sur un téléphone. Les traits de liaison sont des bordures et des
+   pseudo-éléments — aucune image, aucun téléchargement. */
+
+/* ---------- 15.1 le logo ---------------------------------------------- */
+.f8 .f8-logo{display:inline-block;line-height:0;margin:0 0 20px}
+.f8 .f8-logo:hover{text-decoration:none;opacity:.78}
+.f8 .f8-logo img{display:block;width:auto}
+.f8 .f8-logo-hero img{height:54px}
+.f8 .f8-logo-mast img{height:38px}
+.f8 .f8-logo-mast{margin-bottom:16px}
+/* Sur les pages de pilier le logo était déjà là, dans son propre bloc. On ne
+   le double pas : .f8-ph-logo garde sa règle, celle-ci ne la touche pas. */
+
+/* ---------- 15.2 le schéma -------------------------------------------- */
+.f8-facade{margin-top:8px}
+.f8-schema{border-top:3px solid var(--f8-filet-fort);padding-top:26px}
+
+.f8-sc-tete{display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+  padding:0 0 26px;border-bottom:1px solid var(--f8-filet);position:relative}
+.f8 .f8-sc-logo{margin:0}
+.f8 .f8-sc-logo img{height:46px}
+.f8-sc-quoi{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:800;color:var(--f8-mut)}
+
+/* Le trait de liaison : un tronc qui descend de la tête, puis une accolade
+   dont les deux extrémités pointent vers le milieu de chaque volet. C'est le
+   geste qui fait lire l'ensemble comme un schéma et non comme deux colonnes.
+
+   Il est porté par un élément à lui, avec des marges de 25 % : ses extrémités
+   tombent donc exactement au centre de chaque moitié, quelle que soit la
+   largeur. Dessiner les pattes sur les colonnes elles-mêmes obligeait à
+   compenser leur remplissage — 30 px d'un côté, 0 de l'autre — et les bouts ne
+   tombaient jamais au même endroit. */
+.f8-sc-lien{position:relative;height:40px;margin:0 25%}
+.f8-sc-lien::before{content:"";position:absolute;top:0;left:50%;width:1px;
+  height:20px;background:var(--f8-filet)}
+.f8-sc-lien::after{content:"";position:absolute;top:20px;left:0;right:0;
+  height:20px;border-top:1px solid var(--f8-filet);
+  border-left:1px solid var(--f8-filet);border-right:1px solid var(--f8-filet)}
+
+.f8-sc-branches{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+.f8-sc-vol{position:relative;padding:0 30px 8px}
+.f8-sc-vol:first-child{padding-left:0;border-right:1px solid var(--f8-filet)}
+.f8-sc-vol:last-child{padding-right:0}
+
+.f8 a.f8-sc-cap{display:block;color:inherit;padding:0 0 18px;
+  border-bottom:2px solid var(--f8-filet-fort);margin-bottom:4px}
+.f8 a.f8-sc-cap:hover{text-decoration:none}
+.f8 a.f8-sc-cap:hover b{text-decoration:underline}
+.f8-sc-code{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.2em;
+  color:#fff;background:var(--f8-vert-f);padding:4px 9px;margin-bottom:12px}
+.f8-sc-b2c .f8-sc-code{background:var(--f8-filet-fort)}
+.f8 a.f8-sc-cap b{display:block;font-size:clamp(22px,2.6vw,32px);font-weight:800;
+  letter-spacing:-.025em;line-height:1.06;color:var(--f8-ink)}
+.f8-sc-sous{display:block;margin-top:9px;color:var(--f8-mut);font-size:14.5px;max-width:44ch}
+
+.f8-sc-liste{list-style:none;margin:0;padding:0}
+.f8-sc-liste li{border-bottom:1px solid var(--f8-filet)}
+.f8 .f8-sc-liste a{display:flex;align-items:baseline;gap:16px;padding:13px 0;
+  color:var(--f8-ink);font-size:15.5px}
+.f8 .f8-sc-liste a:hover{text-decoration:none;color:var(--f8-vert-f)}
+.f8-sc-nom{flex:1 1 auto;min-width:0}
+/* Le compte est calé à droite, en chasse fixe : c'est ce qui permet de lire la
+   colonne verticalement au lieu de relire chaque ligne. */
+.f8-sc-n{flex:0 0 auto;font-weight:800;color:var(--f8-ink);white-space:nowrap;
+  font-variant-numeric:tabular-nums lining-nums}
+.f8-sc-n i{font-style:normal;font-weight:600;font-size:12px;color:var(--f8-mut);
+  margin-inline-start:5px}
+.f8-sc-rub{margin:16px 0 0;font-size:13.5px;color:var(--f8-mut);line-height:1.7}
+.f8-sc-rub b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--f8-ink-2);margin-bottom:5px}
+
+/* ---------- 15.3 les pages de volet ----------------------------------- */
+.f8-sgcode{display:flex;align-items:center;gap:14px;margin:0 0 4px;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:800;color:var(--f8-mut)}
+.f8-sgcode span{background:var(--f8-vert-f);color:#fff;padding:4px 9px;letter-spacing:.2em}
+.f8-seg-b2c .f8-sgcode span{background:var(--f8-filet-fort)}
+
+/* Trois colonnes en dur, et non repeat(auto-fill, …). Avec auto-fill le nombre
+   de colonnes dépend de la largeur, donc « la première carte d'une rangée »
+   n'est plus calculable : nth-child(2n+1) masquait le mauvais filet dès que la
+   grille passait à trois colonnes, et on voyait des séparateurs en début de
+   ligne. Un nombre de colonnes connu rend nth-child exact. */
+.f8-sgrid{display:grid;gap:0;border-top:3px solid var(--f8-filet-fort);margin:14px 0 0}
+.f8-sgrid-1{grid-template-columns:1fr}
+.f8-sgrid-2{grid-template-columns:repeat(2,1fr)}
+.f8-sgrid-3{grid-template-columns:repeat(3,1fr)}
+.f8-sgrid-2 > a:nth-child(2n+1)::after{display:none}
+.f8 a.f8-sgcard{display:block;color:inherit;padding:22px 26px 24px 0;position:relative;
+  border-bottom:1px solid var(--f8-filet)}
+/* Le filet vertical entre deux colonnes : posé en pseudo-élément et non en
+   border-left, pour qu'il ne coure pas sur toute la hauteur de la grille
+   quand la dernière ligne est incomplète. */
+.f8 a.f8-sgcard::after{content:"";position:absolute;top:22px;bottom:20px;
+  left:-26px;width:1px;background:var(--f8-filet)}
+.f8 a.f8-sgcard:hover{text-decoration:none;background:#fff}
+.f8-sgrid-3 > a:nth-child(3n+1)::after{display:none}
+.f8-sgrid-1 > a::after{display:none}
+.f8-sgn{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;
+  color:var(--f8-vert-f);font-variant-numeric:tabular-nums;margin-bottom:9px}
+.f8-seg-b2c .f8-sgn{color:var(--f8-ink-2)}
+.f8 a.f8-sgcard b{display:block;font-size:19px;font-weight:800;letter-spacing:-.015em;
+  line-height:1.2;color:var(--f8-ink)}
+.f8 a.f8-sgcard p{margin:8px 0 0;color:var(--f8-mut);font-size:14.5px;max-width:46ch}
+.f8-sgv{display:inline-block;margin-top:12px;font-weight:800;color:var(--f8-ink);
+  font-variant-numeric:tabular-nums lining-nums}
+.f8-sgv i{font-style:normal;font-weight:600;font-size:12px;color:var(--f8-mut);
+  margin-inline-start:5px}
+
+.f8-sgprod{margin-top:44px;padding-top:26px;border-top:1px solid var(--f8-filet)}
+.f8-sgprod h2{font-size:clamp(19px,2.1vw,25px);letter-spacing:-.02em}
+.f8-sgrub{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.f8-sgrub li{border:1px solid var(--f8-filet);background:#fff;padding:9px 14px;
+  font-size:14px;color:var(--f8-ink-2)}
+.f8-sgnote{margin:16px 0 0;font-size:13.5px;color:var(--f8-mut);max-width:78ch;
+  border-inline-start:3px solid var(--f8-vert-f);padding-inline-start:16px}
+.f8-sgautre{margin:40px 0 0;padding-top:20px;border-top:1px solid var(--f8-filet);
+  font-size:15.5px;font-weight:700}
+
+/* ---------- 15.4 écrans étroits --------------------------------------- */
+@media (max-width:1080px){
+  .f8-sgrid-3{grid-template-columns:repeat(2,1fr)}
+  .f8-sgrid-3 > a:nth-child(3n+1)::after{display:block}
+  .f8-sgrid-3 > a:nth-child(2n+1)::after{display:none}
+}
+@media (max-width:820px){
+  /* Le tronc et les pattes n'ont plus de sens sur une colonne : deux volets
+     empilés se lisent d'eux-mêmes. On les éteint plutôt que de les tordre. */
+  .f8-sc-branches{grid-template-columns:1fr}
+  .f8-sc-lien{display:none}
+  .f8-sc-vol{padding:26px 0 8px;border-right:0 !important;
+    border-top:1px solid var(--f8-filet)}
+  .f8-sc-tete{gap:16px}
+  .f8-sgrid-1,.f8-sgrid-2,.f8-sgrid-3{grid-template-columns:1fr}
+  .f8 a.f8-sgcard::after{display:none}
+  .f8 a.f8-sgcard{padding-right:0}
+}
+
+/* ================================================================
+   16. « JE VEUX LE MEME GRAPHISME QUE AROLAX »
+   ================================================================
+   Demande explicite, répétée deux fois : « je veux le meme graphisme que
+   arolax », « utilise arolax ». Le § 14 allait dans l'autre sens — angles
+   vifs, filets, corps réduit. Cette section revient au vocabulaire du thème.
+
+   RIEN N'EST INVENTÉ ICI : chaque valeur est RELEVÉE dans le master.css
+   d'Arolax, extrait de la sauvegarde du site en ligne.
+
+     corps        : DM Sans, 18 px          (body { font-size:18px })
+     titres       : PT Serif                (h1…h6 { font-family: --font-secondary })
+     bouton       : 12px 32px, 600, r=30px  (.wc-btn-primary)
+     rayon        : 30px pour les boutons, 10px pour les blocs
+     accent       : #FF845D chez Arolax
+
+   UNE SEULE CHOSE CHANGE PAR RAPPORT AU THÈME : l'accent reste le VERT de
+   8funder. Il a insisté dessus plusieurs fois (« met un vert claire », « le
+   vert du FUNDER »), et l'orange d'Arolax est la couleur de l'agence qui vend
+   le thème, pas la sienne. On prend la FORME d'Arolax, pas sa marque — c'est
+   la même raison qui a fait retirer son logo. */
+
+.f8{
+  --f8-r:10px;          /* les blocs : la valeur la plus courante du thème */
+  --f8-r-btn:30px;      /* les boutons : la pilule de .wc-btn-primary */
+  font-size:18px;
+  line-height:1.55;     /* 1.33 chez Arolax : trop serré pour des listes longues */
+  background:#fff;
+}
+
+/* ---------- 16.1 la typographie du thème -------------------------- */
+/* On n'impose aucune police : le thème charge déjà DM Sans et PT Serif, et
+   les déclarer ici les figerait le jour où il en change.
+   ATTENTION : « font-family:inherit » n'hérite PAS du thème, il hérite du
+   parent — donc de .f8, donc de DM Sans. Les titres repassaient en linéale
+   alors qu'Arolax les compose en PT Serif (h1…h6 { font-family:
+   --font-secondary }). On ne touche donc pas à la police des titres du tout :
+   la règle du thème s'applique d'elle-même. */
+.f8 h1,.f8 h2,.f8 h3{letter-spacing:-.02em}
+.f8-hero h1{font-size:clamp(34px,4.8vw,58px);line-height:1.12;letter-spacing:-.02em}
+.f8-mast h1{font-size:clamp(30px,4vw,46px);line-height:1.14}
+.f8 p,.f8-sub,.f8-hero-l,.f8-mast .f8-lede{font-size:18px}
+
+/* ---------- 16.2 les boutons redeviennent des pilules ------------- */
+.f8 .f8-btn{
+  border-radius:var(--f8-r-btn);padding:12px 32px;font-size:16px;font-weight:600;
+  line-height:1.5;gap:10px;
+}
+.f8 .f8-btn-lg{padding:15px 38px;font-size:17px}
+.f8 .f8-hero-s .f8-btn,.f8 .f8-hero-s .f8-btn-lg{
+  border-radius:var(--f8-r-btn);background:var(--f8-red);margin-inline-end:6px;
+}
+.f8 .f8-hero-s .f8-btn:hover{background:var(--f8-red-d)}
+.f8-hero-s{border-radius:44px;border:1px solid var(--f8-line);padding-inline:8px 6px;
+  background:#fff;box-shadow:0 6px 24px rgba(13,31,22,.07)}
+.f8-hero-s:focus-within{box-shadow:0 6px 24px rgba(13,31,22,.10),0 0 0 3px rgba(20,128,79,.16)}
+
+/* ---------- 16.3 les blocs retrouvent des angles doux ------------- */
+.f8-filters,.f8-search,.f8-selects select,.f8-empty,.f8-avert,.f8-pband,
+.f8-pager .page-numbers,.f8 .f8-tag,.f8-pill,.f8 .f8-chip,.f8 .f8-chip b{
+  border-radius:var(--f8-r);
+}
+.f8 .f8-chip,.f8 .f8-chip b,.f8-pill,.f8 .f8-tag{border-radius:100px}
+.f8-search{padding:2px 14px}
+.f8-filters{box-shadow:0 2px 10px rgba(13,31,22,.05)}
+
+/* ---------- 16.4 le répertoire : des cartes, comme le thème ------- */
+/* Arolax présente ses services en cartes arrondies, pas en rangées réglées.
+   On revient à une grille — mais la JURIDICTION reste calée à droite dans
+   chaque carte : c'est la seule colonne comparable des 1 611 fiches, et
+   c'était le vrai apport du § 14. On garde l'idée, on change la forme. */
+.f8-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+  gap:18px;border-top:0}
+.f8-grid .f8-card{
+  display:flex;flex-direction:column;gap:9px;background:#fff;
+  border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:22px;
+}
+.f8-grid .f8-card:hover{border-color:#b9d3c4;box-shadow:0 8px 26px rgba(13,31,22,.09)}
+.f8-grid .f8-card > *{grid-column:auto}
+.f8-grid .f8-card .f8-card-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  margin-bottom:2px}
+.f8-grid .f8-card .f8-scope{margin-inline-start:auto;text-align:end}
+.f8-grid .f8-card h3{font-size:19px;line-height:1.3}
+.f8-grid .f8-card .f8-amount{
+  grid-column:auto;grid-row:auto;text-align:start;align-self:auto;
+  font-size:16px;color:var(--f8-ok);font-weight:700;
+}
+.f8 .f8-grid .f8-card .f8-more{
+  grid-column:auto;grid-row:auto;justify-self:auto;align-self:auto;
+  margin-top:auto;padding-top:8px;
+}
+.f8-grid .f8-card::before{display:none}
+
+/* ---------- 16.5 les portes et les étapes : des cartes ------------ */
+.f8-portes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;border-top:0;margin:0 0 34px}
+.f8 a.f8-porte{
+  display:flex;flex-direction:column;gap:7px;background:#fff;
+  border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:22px;
+}
+.f8 a.f8-porte:hover{border-color:var(--f8-blue);box-shadow:0 8px 26px rgba(13,31,22,.09)}
+.f8 a.f8-porte::before{
+  content:counter(f8porte,decimal-leading-zero);position:static;inset:auto;
+  height:auto;background:none;transform:none;font-size:12px;font-weight:800;
+  letter-spacing:.08em;color:var(--f8-blue);
+}
+.f8 a.f8-porte b{font-size:18px}
+.f8-etapes{gap:12px;border-top:0}
+.f8-etapes li{background:#fff;border:1px solid var(--f8-line);
+  border-radius:var(--f8-r);padding:20px 22px}
+.f8-etnum{
+  flex:0 0 38px;height:38px;border-radius:100px;background:var(--f8-blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;padding-top:0;
+}
+
+/* ---------- 16.6 les chiffres : un bandeau, pas une réglure ------- */
+.f8-chiffres{
+  background:var(--f8-card);border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:24px 26px;border-top:1px solid var(--f8-line);margin:0 0 34px;
+}
+.f8-chiffres div{border-left:1px solid var(--f8-line);padding:6px 0 6px 26px}
+.f8-chiffres div:first-child{border-left:0;padding-left:0}
+.f8-chiffres b{font-size:clamp(28px,3.4vw,42px)}
+
+/* ---------- 16.7 le haut de page : une bande claire --------------- */
+/* Arolax ouvre ses pages sur une bande teintée, pas sur du papier nu. Le vert
+   très clair est celui qu'il avait demandé (« met un vert claire »). */
+.f8-mast,.f8-hero{background:var(--f8-bg);border-bottom:1px solid var(--f8-line)}
+.f8-mast .f8-wrap::before,.f8-hero .f8-wrap::before{display:none}
+.f8-mast .f8-wrap{padding-top:38px}
+.f8-hero .f8-wrap{padding-top:44px;padding-bottom:52px}
+
+/* ---------- 16.8 le schéma de la façade --------------------------- */
+.f8-schema{border-top:0}
+.f8-sc-vol{padding:0 30px 8px}
+.f8 a.f8-sc-cap{border-bottom:0;padding-bottom:10px}
+.f8-sc-code{border-radius:100px;padding:5px 13px}
+.f8-sc-liste li{border-bottom:1px solid var(--f8-line)}
+.f8-sgcode span{border-radius:100px;padding:5px 13px}
+.f8 a.f8-sgcard{
+  background:#fff;border:1px solid var(--f8-line);border-radius:var(--f8-r);
+  padding:24px;margin-bottom:0;
+}
+.f8 a.f8-sgcard:hover{border-color:var(--f8-blue);box-shadow:0 8px 26px rgba(13,31,22,.09)}
+.f8 a.f8-sgcard::after{display:none}
+.f8-sgrid{gap:18px;border-top:0}
+.f8-sgrub li{border-radius:100px}
+
+@media (max-width:900px){
+  .f8-chiffres div{border-left:0;border-top:1px solid var(--f8-line);padding:18px 0}
+  .f8-chiffres div:first-child{border-top:0}
+}
+
+/* ---------- 16.9 la page des services ----------------------------- */
+.f8-svcnav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
+.f8-svccat{margin:0 0 42px;scroll-margin-top:90px}
+.f8-svccat h2{font-size:clamp(21px,2.4vw,28px);margin:0 0 16px}
+.f8-svcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:16px}
+.f8 a.f8-svccard{display:flex;flex-direction:column;gap:7px;color:inherit;
+  background:#fff;border:1px solid var(--f8-line);border-radius:var(--f8-r);padding:20px}
+.f8 a.f8-svccard:hover{border-color:var(--f8-blue);text-decoration:none;
+  box-shadow:0 8px 26px rgba(13,31,22,.09)}
+.f8 a.f8-svccard b{font-size:17px;line-height:1.3;color:var(--f8-ink)}
+.f8 a.f8-svccard p{margin:0;font-size:14.5px;color:var(--f8-mut);line-height:1.5}
+.f8-svcn{font-size:13px;font-weight:700;color:var(--f8-blue);
+  font-variant-numeric:tabular-nums}
+.f8-svcn i{font-style:normal;font-weight:600;color:var(--f8-mut);margin-inline-start:4px}
+
+/* ---------- 16.10 les effets du thème ------------------------------ */
+/* « bati le 8funder sur le theme ET SES EFFETS ». Arolax fait monter ses
+   titres à l'ouverture et fait apparaître ses blocs au défilement. On reprend
+   le geste, pas la bibliothèque : le thème charge GSAP pour ses propres
+   widgets Elementor, et s'appuyer dessus rendrait nos pages dépendantes d'un
+   script qui n'est pas toujours en file d'attente. Une transition CSS suffit
+   pour ce mouvement-là, et elle ne peut pas manquer.
+
+   .f8-lev-off n'est JAMAIS écrit dans le HTML : c'est le script qui la pose,
+   juste avant de la retirer. Sans JavaScript, le titre est simplement là. */
+.f8-lev{transition:opacity .62s var(--f8-ease),transform .62s var(--f8-ease)}
+.f8-lev-off{opacity:0;transform:translateY(20px)}
+
+/* Les cartes montent d'un peu plus haut qu'avant, et se posent : c'est le
+   caractere du theme, plus ample que le glissement de 14 px du § 7. */
+.f8-rev-off{opacity:0;transform:translateY(22px)}
+.f8-rev{transition:opacity .58s var(--f8-ease),transform .58s var(--f8-ease)}
+
+@media (prefers-reduced-motion: reduce){
+  /* « reduce » ne veut pas dire « plus lent » : tout est déjà en place. */
+  .f8-lev-off{opacity:1;transform:none}
+  .f8-lev{transition:none}
+}
