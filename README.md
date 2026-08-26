@@ -1,41 +1,71 @@
-# 8funder — démonstration des animations
-
-Copie statique du site 8funder tel qu'il est rendu par la version **1.16.0** de
-l'extension. À ouvrir ici :
+# 8funder — démonstration publique
 
 **https://anirudhatalmale6-alt.github.io/8funder-demo/**
 
-## À quoi ça sert
+Copie statique du site 8funder tel que l'extension le rend, en version
+**1.17.0**. Aucune installation n'est nécessaire pour la regarder : c'est une
+page web, elle s'ouvre sur un téléphone comme sur un ordinateur.
 
-Les animations sont entièrement côté navigateur (CSS + `f8-vue.js`). Une copie
-statique les conserve donc à l'identique : c'est le même HTML, le même CSS et le
-même JavaScript que ceux que sert le WordPress une fois l'extension installée.
+Elle existe pour une raison simple : le site en ligne tourne encore une
+ancienne version, donc les animations et les couleurs décrites dans les
+messages n'y sont pas visibles. Ici, elles le sont.
 
-Autrement dit, ce qui bouge ici bougera exactement pareil sur 8funder.com.
+## Ce qu'il y a de nouveau en 1.17.0
 
-## Ce qui est animé, et où le voir
+**L'accueil est passé à la racine.** Sur `8funder.com`, la page d'accueil est
+encore la démonstration du thème Arolax : logo de l'agence, menu
+`DEMO / ADVANCED PORTFOLIO / HOME…`, titre coupé en deux (« StrategizingF
+unding. »), et « 1k+ customers word-wide ». Ici, la racine ouvre directement
+sur 8funder.
 
-| Effet | Où |
+> L'ancienne adresse de démonstration, `/8funder-demo/8funder/`, renvoie
+> maintenant vers la racine. Elle ne tombe pas en 404.
+
+**Les touches de vert.** L'accent vif `#C9F31D` a été *relevé sur la page
+d'accueil en ligne du client*, pas choisi : c'est déjà sa couleur. Il sert
+maintenant de fil conducteur entre le thème et l'extension, qui étaient verts
+tous les deux sans être du même vert.
+
+| Où | Ce qu'on voit |
 |---|---|
-| Le titre et le chapô montent à l'ouverture, en deux temps | toutes les pages |
-| Jauge de défilement en haut de l'écran | toutes les pages |
-| Apparition des blocs au défilement | accueil, pages de service |
-| Compteurs qui montent jusqu'à leur valeur | accueil, répertoire |
-| Tracé progressif des courbes | `/taux/` |
-| Mise en évidence du résultat calculé | `/comparateur/`, `/diagnostic/` |
+| Haut des bandeaux | un filet lime de 3 px |
+| Bouton principal | pilule lime, texte noir — comme son bouton « LET'S TALK » |
+| Jauge de défilement | fine barre lime en haut de l'écran, qui suit la lecture |
+| Onglet courant | souligné en lime dans la barre du bandeau |
+| Blocs de chiffres | filet lime au-dessus des nombres |
+| Survol des cartes | le contour passe au lime |
 
-`prefers-reduced-motion` coupe **tout** — pas « ralentit », coupe. C'est une
-exigence d'accessibilité, pas une option.
+Le lime n'est jamais employé comme couleur de texte sur fond clair (1,4:1,
+illisible) : uniquement en fond avec de l'encre sombre, ou en filet. Les
+**montants** restent en bronze — un chiffre d'argent doit se lire.
 
-## Ce que la copie n'est pas
+## Les animations
 
-Une démonstration, pas un miroir. Le site complet compte près de 5 000 adresses ;
-ici il y a l'accueil, les 21 pages réelles, les 6 pages de services, et un
-échantillon plafonné à 40 fiches par section (répertoire, organismes, agences).
-Les liens au-delà de ce plafond ne mènent nulle part — c'est voulu.
+| Effet | Où le voir |
+|---|---|
+| Le titre monte à l'ouverture | l'accueil, au chargement |
+| Les blocs apparaissent au défilement | partout, en descendant |
+| Les compteurs montent jusqu'à leur valeur | l'accueil, bloc des chiffres |
+| Les courbes de taux se tracent | `/taux/` |
+| La jauge de défilement | tout en haut de l'écran, en descendant |
 
-Les formulaires ne soumettent rien : il n'y a pas de serveur derrière une copie
-statique. Le simulateur et le comparateur, eux, fonctionnent, parce qu'ils
-calculent dans le navigateur.
+## Les limites de cette copie, dites d'avance
 
-Reconstruction : `python3 miroir-demo.py` dans le dossier du projet.
+- **Plafonnée à 40 fiches par section.** Le répertoire complet fait 1 611
+  programmes et 702 organismes ; tout copier donnait 46 Mo pour une
+  démonstration où l'on veut juger un mouvement. Le script imprime ce qu'il
+  laisse de côté, il ne le cache pas.
+- **Les formulaires ne mènent nulle part.** Recherche, diagnostic, devis :
+  c'est une copie de pages, il n'y a pas de WordPress derrière.
+- **Ce n'est pas le site en ligne.** C'est ce que le site affichera une fois la
+  1.17.0 installée.
+
+## Reconstruire
+
+```
+python3 miroir-demo.py          # dans 8funder/, avec le WordPress local en marche
+rsync -a --delete --exclude .git demo-anim/ gitwork-demo/
+```
+
+Le dossier `demo-anim` est effacé à chaque exécution : le dépôt Git vit dans
+`gitwork-demo`, jamais dedans.

@@ -1,0 +1,46 @@
+/* 8funder — les touches de vert SUR LE THÈME, pas seulement sur l'extension.
+   ================================================================
+   Tout le reste de l'extension est enfermé dans .f8, exprès : rien ne devait
+   fuir sur les pages Elementor du client. Ce fichier-ci est le seul qui sorte
+   de cette boîte, et il est volontairement minuscule.
+
+   IL NE CHANGE QUE DES COULEURS. Aucune règle de position, de taille, de
+   marge ou d'affichage : une feuille qui déborde sur un thème acheté peut
+   casser une mise en page, et une mise en page cassée coûte plus cher qu'un
+   orange oublié.
+
+   CE QUI EST MESURÉ, ET COMMENT.
+   Dans le master.css d'Arolax (celui de SA sauvegarde, pas une version du
+   commerce) :
+       --primary: #FF845D          déclaré une fois, dans :root
+       var(--primary)              60 emplois
+       #FF845D écrit en dur         1 emploi   (.header-btn-8 a:hover)
+   Donc redéfinir la variable couvre 60 des 61 endroits, et le 61e est repris
+   nommément ci-dessous. Ce n'est pas une estimation, c'est un comptage.
+
+   POURQUOI html:root ET PAS :root.
+   `:root` pèse (0,1,0). Si le thème charge sa feuille après la nôtre, à poids
+   égal c'est la sienne qui gagne, et l'orange revient sans prévenir.
+   `html:root` pèse (0,1,1) et gagne quel que soit l'ordre de la file
+   d'attente — y compris le jour où un cache de fusion réordonne les fichiers.
+
+   CE QUE ÇA CHANGE AUJOURD'HUI SUR SON SITE : rien de visible, et c'est
+   attendu. J'ai mesuré sa page d'accueil : l'orange d'Arolax n'y est rendu par
+   AUCUN élément, parce que sa maquette Elementor pose ses propres couleurs.
+   Cette feuille est là pour le premier bouton, le premier fil d'Ariane, le
+   premier lien de pagination servis par le THÈME — qui, eux, sortiraient
+   orange. */
+
+html:root{
+  --primary:#12794b;    /* le vert forêt de 8funder */
+  --f8-lime:#c9f31d;    /* l'accent vif relevé sur SA page d'accueil */
+}
+
+/* Le seul orange écrit en dur du thème. */
+.header-btn-8 a:hover{background-color:#12794b}
+
+/* Le bouton d'en-tête d'Arolax, quand il est servi par le thème et non par
+   Elementor : lime, encre sombre — exactement le rendu de son « LET'S TALK »
+   actuel, pour que les deux moitiés du site aient le même bouton. */
+.header-btn-8 a{background:#c9f31d;color:#12210a}
+.header-btn-8 a:hover{color:#fff}

@@ -1564,3 +1564,139 @@
   .f8-lev-off{opacity:1;transform:none}
   .f8-lev{transition:none}
 }
+
+/* ================================================================
+   17. « RAJOUTE DES TOUCHES DE VERT »
+   ================================================================
+   Demande du 26 août : « rajoute des touches / de vert / sur le funder ».
+
+   AVANT D'AJOUTER QUOI QUE CE SOIT, J'AI MESURÉ SA PAGE D'ACCUEIL EN LIGNE.
+   Pas lu un fichier de thème : ouvert 8funder.com dans un vrai navigateur et
+   relevé les couleurs CALCULÉES sur chaque élément visible.
+
+     --primary du thème Arolax .......... #FF845D  (orange)
+     éléments qui rendent cet orange ....       0
+     couleur d'accent réellement rendue .. #C9F31D (vert acide), 25 éléments
+     tons secondaires .................... #E6FFA8 (vert acide pâle), 3
+
+   Deux enseignements, et ils changent la réponse :
+
+   1. L'ORANGE D'AROLAX N'APPARAÎT NULLE PART sur sa page. Sa maquette
+      Elementor pose ses propres couleurs et ne suit pas la variable du thème.
+      Repeindre --primary ne se VOIT donc pas aujourd'hui — mais l'orange
+      resurgirait au premier bouton de thème posé. On le neutralise quand même
+      (voir assets/theme-vert.css) : c'est de l'hygiène, pas de l'effet.
+
+   2. SON ACCENT EST DÉJÀ UN VERT — un vert acide. Et mon extension était en
+      vert forêt. Les deux moitiés du site étaient donc vertes SANS ÊTRE LA
+      MÊME. C'est précisément ce qui donne l'impression d'un site recousu.
+
+   Alors je n'invente pas une troisième couleur : je prends la sienne.
+   #C9F31D devient la touche vive de 8funder, et le vert forêt reste la
+   couleur de fond. Le haut de son site et mes pages se répondent enfin.
+
+   RÈGLE DE LISIBILITÉ, non négociable. #C9F31D sur blanc donne un contraste
+   de 1,4:1 — illisible. Il n'est JAMAIS employé comme couleur de texte sur
+   fond clair. Uniquement : en fond avec de l'encre sombre (comme le bouton
+   « LET'S TALK » de son en-tête), en filet, ou en texte sur fond vert foncé.
+   C'est aussi la raison pour laquelle les MONTANTS restent en bronze : un
+   chiffre d'argent doit se lire, pas scintiller. */
+
+/* ATTENTION — CES TROIS VARIABLES SONT DECLAREES SUR :root, PAS SUR .f8.
+   Premiere version : je les avais posees sur .f8, et la jauge de defilement
+   est restee incolore. Raison : f8-vue.js cree la jauge en l'accrochant a
+   <body>, donc HORS de .f8. Une variable inconnue rend toute la declaration
+   qui l'utilise invalide — le fond ne devenait pas noir, il disparaissait.
+   Une couleur de marque doit vivre a la racine du document, pas dans une
+   boite ; ce sont les REGLES qui restent enfermees dans .f8, pas la palette. */
+:root{
+  --f8-lime:#c9f31d;
+  --f8-lime-d:#aad414;   /* la même, assombrie, pour un survol */
+  --f8-lime-ink:#12210a; /* l'encre posée SUR le lime : 12,1:1 */
+}
+
+/* ---------- 17.1 le filet, la signature du thème ------------------ */
+/* Arolax ouvre ses sections par un court trait horizontal devant le
+   sur-titre. On reprend ce geste en lime, en haut des deux bandeaux. */
+.f8-hero::before,
+.f8-mast::before{
+  /* Ces deux pseudo-éléments portent déjà un voile (§ 7). On ne les
+     remplace pas : on ajoute le filet par une bordure du parent. */
+}
+.f8-hero,.f8-mast{border-top:3px solid var(--f8-lime)}
+
+/* ---------- 17.2 la jauge de défilement devient visible ----------- */
+/* Elle était en dégradé de verts sur un site vert : présente, invisible.
+   En lime elle se détache de tout ce qui est en dessous. */
+.f8-prog{background:linear-gradient(90deg,var(--f8-lime-d),var(--f8-lime) 55%,#e6ffa8)}
+
+/* ---------- 17.3 l'onglet où l'on se trouve ----------------------- */
+/* La barre de navigation du bandeau ne disait pas où on était. Un filet
+   lime sous l'onglet courant le dit, sans ajouter un seul mot.
+
+   PREMIÈRE VERSION FAUSSE, ET LE TEST DE CONTRASTE L'A ATTRAPÉE. J'avais
+   écrit « color:#fff » sur l'onglet courant, en pensant au bandeau vert
+   foncé de l'accueil. Mais le § 16 a rendu le bandeau des pages INTÉRIEURES
+   pâle (#f4faf6) : sur /taux/, /subventions/ et /comparateur/, l'onglet
+   courant devenait blanc sur presque blanc — rapport 1,06:1, illisible.
+
+   La correction n'est pas d'ajuster le blanc, c'est de NE PAS TOUCHER À LA
+   COULEUR DU TEXTE. Le filet, lui, se lit sur les deux fonds. Une règle qui
+   s'applique à deux bandeaux de valeurs opposées n'a pas le droit de fixer
+   une couleur d'encre. */
+.f8-nav a{border-bottom:3px solid transparent}
+.f8-nav a:hover{border-bottom-color:rgba(201,243,29,.55)}
+.f8-nav a[aria-current="page"],
+.f8-nav a.f8-on{border-bottom-color:var(--f8-lime);font-weight:700}
+
+/* ---------- 17.4 le bouton principal, comme le sien --------------- */
+/* Son en-tête porte un bouton lime à texte noir. Le bouton principal de
+   l'extension le reprend À L'IDENTIQUE quand il est posé sur du foncé —
+   c'est la même pilule, la même couleur, le même contraste. */
+/* Les selecteurs sont volontairement lourds : § 16.4 pose deja
+   « .f8 .f8-hero-s .f8-btn » (0,3,0). Un « .f8-hero .f8-btn » (0,2,0) perdait
+   en silence — le bouton gardait le vert foret et prenait quand meme l'encre
+   sombre du lime. On egale le poids au lieu de sortir le !important. */
+.f8-hero .f8-btn,
+.f8-mast .f8-btn,
+.f8 .f8-hero-s .f8-btn,
+.f8 .f8-hero-s .f8-btn-lg,
+.f8 .f8-btn-lime{
+  background:var(--f8-lime);
+  color:var(--f8-lime-ink);
+  border-color:var(--f8-lime);
+}
+.f8-hero .f8-btn:hover,
+.f8-mast .f8-btn:hover,
+.f8 .f8-hero-s .f8-btn:hover,
+.f8 .f8-hero-s .f8-btn-lg:hover,
+.f8 .f8-btn-lime:hover{background:var(--f8-lime-d);border-color:var(--f8-lime-d);color:var(--f8-lime-ink)}
+.f8-hero .f8-btn .f8-i,
+.f8-mast .f8-btn .f8-i{stroke:var(--f8-lime-ink)}
+
+/* ---------- 17.5 les portes d'entrée ------------------------------ */
+/* Quatre cartes blanches identiques : rien ne guidait l'œil. Un filet lime
+   apparaît au survol, du côté d'où vient la lecture. */
+.f8 a.f8-porte{border-inline-start:3px solid transparent;transition:border-color .18s var(--f8-ease),
+  border-inline-start-color .18s var(--f8-ease),box-shadow .18s var(--f8-ease)}
+.f8 a.f8-porte:hover{border-inline-start-color:var(--f8-lime)}
+
+/* ---------- 17.6 les chiffres --------------------------------------- */
+/* Le nombre reste en bronze — c'est un signal, il doit se lire. Le filet
+   qui le souligne, lui, passe en lime : la couleur marque la structure,
+   pas la donnée. */
+.f8-chiffres div{border-top:3px solid var(--f8-lime)}
+
+/* ---------- 17.7 les liens de section ------------------------------- */
+/* Un survol de carte passait de gris à vert forêt : deux verts proches,
+   le changement ne se voyait pas. Le lime tranche. */
+.f8 a.f8-svccard:hover,
+.f8 a.f8-cart:hover{border-color:var(--f8-lime)}
+
+@media (prefers-contrast: more){
+  /* Un filet de 3 px reste un filet. En contraste renforcé on l'épaissit
+     plutôt que de changer sa couleur : le lime est déjà le ton le plus
+     franc de la palette. */
+  .f8-hero,.f8-mast{border-top-width:5px}
+  .f8-chiffres div{border-top-width:5px}
+}
