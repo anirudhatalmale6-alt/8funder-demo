@@ -1700,3 +1700,147 @@
   .f8-hero,.f8-mast{border-top-width:5px}
   .f8-chiffres div{border-top-width:5px}
 }
+
+/* ==================================================================== */
+/* § 18 — LA STRUCTURE DE L'ACCUEIL (1.18.0)                            */
+/* ==================================================================== */
+/* « une structure moderne ». Ce paragraphe ne change AUCUNE couleur : le
+   § 17 les a posées et elles sont les siennes, relevées sur sa page. Il ne
+   change que la DISPOSITION et le RYTHME, c'est-à-dire ce qui manquait.
+   Tout est dans .f8 — rien ici ne sort de la boîte de l'extension. */
+
+/* ---------- 18.1 le surtitre de section ----------------------------- */
+/* Sept sections d'affilée avec le même <h2> se lisent comme une liste. Le
+   surtitre coûte une ligne et dit à l'oeil où il en est. Le tiret est un
+   pseudo-élément : pas un caractère, donc jamais lu à voix haute par un
+   lecteur d'écran et jamais copié avec le texte. */
+.f8-sh{margin:0 0 18px}
+.f8 .f8-eb{display:flex;align-items:center;gap:9px;margin:0 0 7px;
+  font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--f8-mut)}
+.f8 .f8-eb::before{content:"";flex:0 0 22px;height:3px;border-radius:2px;
+  background:var(--f8-lime)}
+.f8-sh h2{margin:0}
+.f8-sh .f8-sub{margin:8px 0 0}
+.f8-browse{margin-top:56px}
+
+/* ---------- 18.2 le bandeau sur deux colonnes ----------------------- */
+/* Le titre tenait sur la moitié gauche et laissait l'autre moitié vide.
+   1.1fr / .9fr et non 1fr/1fr : la colonne de texte porte un titre en
+   serif de 44 px, elle a besoin d'un peu plus que la moitié pour ne pas
+   casser toutes les lignes. */
+.f8-hero-g{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;
+  align-items:center;padding-block:64px}
+.f8-hero-g h1{font-size:clamp(30px,3.4vw,44px);max-width:15ch}
+.f8-hero-g .f8-hero-l{max-width:46ch}
+.f8-hero-c{min-width:0}
+
+/* Le panneau. Il ne décore pas : il porte les mêmes chiffres que le reste
+   de la page, lus à la même seconde. Un vide de cette taille se remplit
+   avec quelque chose de vrai, ou pas du tout. */
+.f8-panneau{background:var(--f8-card);border:1px solid var(--f8-line);
+  border-top:3px solid var(--f8-lime);border-radius:18px;padding:24px 24px 20px;
+  box-shadow:0 18px 44px rgba(6,40,24,.09)}
+.f8-pan-l{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px}
+.f8-pan-l li{display:flex;align-items:baseline;gap:12px;padding:11px 0;
+  border-bottom:1px solid var(--f8-line)}
+.f8-pan-l li:last-child{border-bottom:0}
+.f8-pan-l b{font-size:27px;font-weight:800;line-height:1;color:var(--f8-blue);
+  font-variant-numeric:tabular-nums;min-width:3.6ch}
+.f8-pan-l span{font-size:14px;color:var(--f8-ink-2)}
+.f8-pan-t{margin:16px 0 9px;font-size:12.5px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--f8-mut)}
+.f8-pan-p{display:flex;flex-wrap:wrap;gap:7px}
+.f8-panneau .f8-chip{font-size:13px;padding:6px 10px}
+.f8-pan-n{margin:16px 0 0;font-size:12px;line-height:1.5;color:var(--f8-mut)}
+
+/* ---------- 18.3 la bande de preuve --------------------------------- */
+/* Les chiffres étaient au quatrième écran, après le mur de liens. Ils
+   remontent juste sous le bandeau, sur toute la largeur : c'est la seule
+   chose qui prouve d'un coup d'oeil que le site n'est pas une coquille. */
+.f8-bande{background:#fff;border-block:1px solid var(--f8-line);padding:34px 0}
+.f8-bande .f8-chiffres{margin:0}
+
+/* ---------- 18.4 les portes, en cartes ------------------------------ */
+/* Une carte sans repère visuel se lit comme une ligne de tableau. La
+   pastille d'icône est ce qui distingue les quatre au premier coup d'oeil.
+   Elle ne porte AUCUNE information à elle seule : le titre la répète. */
+/* Le § 16 pose déjà un compteur « 01 02 03 04 » en ::before, en haut de
+   chaque carte. Empilé avec la pastille, ça faisait DEUX repères l'un sous
+   l'autre qui se disputent le même rôle et repoussent le titre d'un cran.
+   Ils passent donc sur la MÊME ligne : l'icône à gauche, le compteur à
+   droite.
+
+   En GRILLE et non en position absolue, et ce n'est pas un détail de goût :
+   tests-vue.py exige que ce compteur reste DANS LE FLUX (position:static).
+   La raison est écrite dans le test — un ::before absolu de 3 px repliés
+   existait déjà sur .f8-porte, et redéfinir « content » sans remettre la
+   boîte à plat avait déjà affiché le compteur dans une boîte invisible,
+   sans une seule erreur nulle part. La grille place les deux cases sans
+   sortir personne du flux. */
+.f8-portes-i{gap:16px}
+.f8-portes-i .f8-porte{display:grid;grid-template-columns:auto auto;
+  align-items:center;column-gap:12px;row-gap:7px;padding-top:20px}
+.f8 .f8-portes-i a.f8-porte::before{grid-area:1/2;justify-self:end;
+  position:static;font-size:12.5px;color:var(--f8-mut)}
+.f8-portes-i .f8-pico{grid-area:1/1}
+.f8-portes-i .f8-porte b,
+.f8-portes-i .f8-porte span{grid-column:1/-1}
+.f8-pico{display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:13px;margin-bottom:6px;
+  background:#eaf6ee;color:var(--f8-blue);
+  transition:background .2s var(--f8-ease),color .2s var(--f8-ease)}
+.f8-pico .f8-i{width:22px;height:22px;stroke-width:1.9}
+.f8 a.f8-porte:hover .f8-pico{background:var(--f8-lime);color:var(--f8-lime-ink)}
+/* Le titre ne doit pas passer sous le compteur : on lui réserve la place. */
+.f8-portes-i .f8-porte b{padding-right:26px}
+
+/* ---------- 18.5 les trois étapes, côte à côte ---------------------- */
+/* En colonne, trois étapes numérotées prennent un écran entier pour dire
+   « c'est simple ». Côte à côte, elles le montrent. */
+/* La pastille reste À GAUCHE du titre, en ligne, et ne passe pas au-dessus :
+   tests-vue.py mesure que son bord droit tombe avant le bord gauche du
+   titre. C'est une vraie contrainte de lisibilité — un numéro d'étape posé
+   au-dessus de son titre n'est plus une marge, c'est un deuxième titre. */
+.f8-etapes-r{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.f8-etapes-r li:hover{transform:translateY(-3px)}
+
+/* ---------- 18.6 l'appel à l'action --------------------------------- */
+/* La page se terminait sur une note de bas de page grise. */
+.f8-cta{margin-top:60px;background:var(--f8-blue);color:#fff}
+.f8-cta .f8-wrap{display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:22px 40px;padding-block:42px}
+.f8-cta-c{min-width:0;max-width:56ch}
+.f8-cta h2{margin:0 0 8px;color:#fff;font-size:26px}
+.f8-cta p{margin:0;color:#dff0e6;font-size:15.5px;line-height:1.6}
+.f8-cta-a{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+/* Le bouton reprend exactement le lime du bandeau : c'est le même geste,
+   il doit avoir la même couleur. */
+.f8 .f8-cta .f8-btn{background:var(--f8-lime);color:var(--f8-lime-ink);
+  border-color:var(--f8-lime)}
+.f8 .f8-cta .f8-btn:hover{background:var(--f8-lime-d);border-color:var(--f8-lime-d);
+  color:var(--f8-lime-ink)}
+/* Le lien secondaire est BLANC souligné, pas lime : du lime sur ce fond
+   descend à 3,4:1 en texte. La couleur marque la structure, jamais la
+   donnée ni le texte courant — voir § 17. */
+.f8 a.f8-cta-2{color:#fff;font-size:14.5px;text-decoration:underline;
+  text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+.f8 a.f8-cta-2:hover{text-decoration-color:#fff}
+.f8-cta+.f8-source{margin-top:0}
+
+@media (max-width:980px){
+  /* Le panneau passe SOUS le texte, il ne disparaît pas : ses chiffres
+     sont la première preuve de la page, et un téléphone en a autant
+     besoin qu'un écran large. */
+  .f8-hero-g{grid-template-columns:1fr;gap:32px;padding-block:44px}
+  .f8-hero-g h1{max-width:20ch}
+  .f8-etapes-r{grid-template-columns:1fr}
+  .f8-browse{margin-top:42px}
+}
+@media (max-width:640px){
+  .f8-cta .f8-wrap{padding-block:32px}
+  .f8-cta h2{font-size:22px}
+  .f8-cta-a{width:100%}
+  .f8 .f8-cta .f8-btn{width:100%;justify-content:center}
+  .f8-panneau{padding:20px 18px 16px}
+}
